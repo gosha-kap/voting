@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="jdbc:hsqldb:file:jdbc:hsqldb:mem:voting/" uuid="f74fae63-e0d7-4dde-ac64-fb3d57fa1421">
+      <driver-ref>hsqldb.local</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.hsqldb.jdbc.JDBCDriver</jdbc-driver>
+      <jdbc-url>jdbc:hsqldb:file:jdbc:hsqldb:mem:voting/</jdbc-url>
+    </data-source>
+  </component>
+</project>
