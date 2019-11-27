@@ -23,3 +23,40 @@ Each restaurant provides new menu each day.
 As a result, provide a link to github repository.
 
 It should contain the code and README.md with API documentation and curl commands to get data for voting and vote.
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+
+--Info--
+getAllToday() - List of  all today's restaurant menus with vote count. ${root}/info/today   ___!!__DONE__!!___
+getHistoryVoting() ${root}/info/history
+getHistoryForOne(id)  ${root}/info/history/{restaurandID}
+getPopularsMenus ${root}/info/top10
+getPopularsMenuForOne ${root}/info/top10/{restaurandID}
+
+zzz
+---User ---
+
+register  - register new user - ${root}/register
+login - ${root}/login
+logout -${root}/logout
+vote - ${root}/vote/{restaurantId}
+voteInfo - ${root}/vote
+
+---Admin---
+createRestaurant - create a new Restaurant ${root}/restaurants/
+createMenu
+createMeal
+updateRestaurant
+updateMeal
+deleteRestaurant
+deleteMenu
+deleteMeal
+
+--------
+/////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+

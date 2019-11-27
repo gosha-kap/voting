@@ -6,5 +6,13 @@ import java.util.List;
 
 public interface MenuService {
 
-    List<Menu> getAllUpdated();
+    List<Menu> getTodayMenus();
+
+    List<Menu> getHistoryForOne(int id);
+
+    List<Menu> getHistoryVoting();
+
+    List<Menu> getPopularsMenuForOne(int id);
+
+    List<Menu> getPopularsMenus();
 }

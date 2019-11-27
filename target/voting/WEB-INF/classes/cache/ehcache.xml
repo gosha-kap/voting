@@ -18,11 +18,11 @@
         <expiry>
             <ttl unit="hours">24</ttl>
         </expiry>
-        <heap unit="entries">200</heap>
+        <heap unit="entries">2000</heap>
     </cache-template>
 
 
-    <cache alias="menuCache" uses-template="myDefault"/>
+    <cache alias="history" uses-template="myDefault"/>
 
 
 </config>

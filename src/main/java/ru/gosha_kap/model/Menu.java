@@ -16,8 +16,8 @@ public class Menu {
     @Column(name = "id")
     private int id;
 
-    @Column(name="rating")
-    private int rating;
+    @Column(name = "votes")
+    private int votes;
 
     @Column(name="date")
     private LocalDate date = LocalDate.now();
@@ -26,18 +26,18 @@ public class Menu {
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
-    @OneToMany(mappedBy = "menu",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "menu", fetch = FetchType.LAZY)
     private List<Meal> meals;
 
     public Menu() {
     }
 
-    public int getRating() {
-        return rating;
+    public int getVotes() {
+        return votes;
     }
 
-    public void setRating(int rating) {
-        this.rating = rating;
+    public void setVotes(int votes) {
+        this.votes = votes;
     }
 
     public int getId() {
@@ -72,7 +72,7 @@ public class Menu {
     @Override
     public String toString() {
         return "Menu{" +
-                "rating=" + rating +
+                "rating=" + votes +
                 ", date=" + date +
                 ", restaurant=" + restaurant.getName() +
                 ", meals=" + meals +

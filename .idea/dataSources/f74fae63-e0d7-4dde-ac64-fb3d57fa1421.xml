@@ -38,25 +38,25 @@
       <DataType>INTEGER|4s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="13" parent="6" name="SYS_IDX_SYS_PK_10246_10251">
+    <index id="13" parent="6" name="SYS_IDX_SYS_PK_10147_10152">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>ID</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="14" parent="6" name="SYS_IDX_SYS_FK_10250_10255">
+    <index id="14" parent="6" name="SYS_IDX_SYS_FK_10151_10156">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>MENU_ID</ColNames>
     </index>
-    <key id="15" parent="6" name="SYS_PK_10246">
+    <key id="15" parent="6" name="SYS_PK_10147">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>ID</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="16" parent="6" name="SYS_FK_10250">
+    <foreign-key id="16" parent="6" name="SYS_FK_10151">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>MENU_ID</ColNames>
       <RefTableName>MENUS</RefTableName>
-      <RefKeyName>SYS_PK_10235</RefKeyName>
+      <RefKeyName>SYS_PK_10136</RefKeyName>
       <RefColNames>ID</RefColNames>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
@@ -72,7 +72,7 @@
       <NotNull>1</NotNull>
       <DefaultExpression>LOCALTIMESTAMP</DefaultExpression>
     </column>
-    <column id="19" parent="7" name="RATING">
+    <column id="19" parent="7" name="VOTES">
       <Position>3</Position>
       <DataType>INTEGER|4s</DataType>
       <NotNull>1</NotNull>
@@ -83,25 +83,25 @@
       <DataType>INTEGER|4s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="21" parent="7" name="SYS_IDX_SYS_PK_10235_10240">
+    <index id="21" parent="7" name="SYS_IDX_SYS_PK_10136_10141">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>ID</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="22" parent="7" name="SYS_IDX_SYS_FK_10239_10244">
+    <index id="22" parent="7" name="SYS_IDX_SYS_FK_10140_10145">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>RESTAURANT_ID</ColNames>
     </index>
-    <key id="23" parent="7" name="SYS_PK_10235">
+    <key id="23" parent="7" name="SYS_PK_10136">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>ID</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="24" parent="7" name="SYS_FK_10239">
+    <foreign-key id="24" parent="7" name="SYS_FK_10140">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>RESTAURANT_ID</ColNames>
       <RefTableName>RESTAURANTS</RefTableName>
-      <RefKeyName>SYS_PK_10229</RefKeyName>
+      <RefKeyName>SYS_PK_10132</RefKeyName>
       <RefColNames>ID</RefColNames>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
@@ -116,27 +116,21 @@
       <DataType>VARCHAR(255)|12s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="27" parent="8" name="GLOBALRATING">
-      <Position>3</Position>
-      <DataType>INTEGER|4s</DataType>
-      <NotNull>1</NotNull>
-      <DefaultExpression>0</DefaultExpression>
-    </column>
-    <index id="28" parent="8" name="SYS_IDX_SYS_PK_10229_10232">
+    <index id="27" parent="8" name="SYS_IDX_SYS_PK_10132_10134">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>ID</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="29" parent="8" name="RESTAURANTS_NAME">
+    <index id="28" parent="8" name="RESTAURANTS_NAME">
       <ColNames>NAME</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="30" parent="8" name="SYS_PK_10229">
+    <key id="29" parent="8" name="SYS_PK_10132">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>ID</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="31" parent="8" name="RESTAURANTS_NAME">
+    <key id="30" parent="8" name="RESTAURANTS_NAME">
       <ColNames>NAME</ColNames>
     </key>
   </database-model>

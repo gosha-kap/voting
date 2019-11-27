@@ -11,18 +11,18 @@
         <expiry>
             <ttl unit="minutes">5</ttl>
         </expiry>
-        <heap unit="entries">5000</heap>
+        <heap>5000</heap>
     </cache-template>
 
     <cache-template name="myDefault">
         <expiry>
             <ttl unit="hours">24</ttl>
         </expiry>
-        <heap unit="entries">200</heap>
+        <heap>2000</heap>
     </cache-template>
 
 
-    <cache alias="menuCache" uses-template="myDefault"/>
+    <cache alias="history" uses-template="myDefault"/>
 
 
 </config>
