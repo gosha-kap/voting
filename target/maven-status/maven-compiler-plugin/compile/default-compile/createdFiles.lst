@@ -1,4 +1,4 @@
-ru/gosha_kap/to/MealTo.class
+ru/gosha_kap/web/InfoController.class
 ru/gosha_kap/to/RestrntFullInfo.class
-ru/gosha_kap/web/rest/InfoController.class
+ru/gosha_kap/util/JpaUtil.class
 ru/gosha_kap/web/HelloController.class

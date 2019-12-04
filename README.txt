@@ -10,7 +10,7 @@ The task is:
 Build a voting system for deciding where to have lunch.
 
     2 types of users: admin and regular users
-    Admin can input a restaurant and it's lunch menu of the day (2-5 items usually, just a dish name and price)
+    Admin can input a restaurant and it's lunch menu of the day (2-5 items usually, just a dish restaurant_name and price)
     Menu changes each day (admins do the updates)
     Users can vote on which restaurant they want to have lunch at
     Only one vote counted per user
@@ -29,11 +29,11 @@ It should contain the code and README.md with API documentation and curl command
 --Info--
 getAllToday() - List of  all today's restaurant menus with vote count. ${root}/info/today   ___!!__DONE__!!___
 getHistoryVoting() ${root}/info/history
-getHistoryForOne(id)  ${root}/info/history/{restaurandID}
+getHistoryForOne(restaurant_id)  ${root}/info/history/{restaurandID}
 getPopularsMenus ${root}/info/top10
 getPopularsMenuForOne ${root}/info/top10/{restaurandID}
 
-zzz
+
 ---User ---
 
 register  - register new user - ${root}/register

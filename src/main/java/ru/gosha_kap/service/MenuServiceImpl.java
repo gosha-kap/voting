@@ -28,7 +28,7 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public List<Menu> getHistoryForOne(int id) {
-        return menuRepository.findAllByRestaurantIdOrderByDateDesc(id);
+        return menuRepository.findAllByRestaurantId(id);
     }
 
 
@@ -41,12 +41,12 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public List<Menu> getPopularsMenuForOne(int id) {
-        return menuRepository.findTop10ByRestaurantIdAndVotesIsGreaterThanOrderByVotesDescDateDesc(id, NOT_NULL_VOTECOUNT);
+        return menuRepository.findTop10ByRestaurantIdAndVotesIsGreaterThan(id, NOT_NULL_VOTECOUNT);
     }
 
     @Override
     public List<Menu> getPopularsMenus() {
-        return menuRepository.findTop10ByVotesGreaterThanOrderByVotesDescDateDesc(NOT_NULL_VOTECOUNT);
+        return menuRepository.findTop10ByVotesGreaterThan(NOT_NULL_VOTECOUNT);
     }
 
 

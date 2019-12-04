@@ -29,6 +29,14 @@ public class Menu {
     @OneToMany(mappedBy = "menu", fetch = FetchType.LAZY)
     private List<Meal> meals;
 
+    public Menu(int id, LocalDate date, int votes, Restaurant restaurant, List<Meal> meals) {
+        this.id = id;
+        this.votes = votes;
+        this.date = date;
+        this.restaurant = restaurant;
+        this.meals = meals;
+    }
+
     public Menu() {
     }
 

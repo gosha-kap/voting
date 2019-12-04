@@ -1,4 +1,3 @@
-
 DROP TABLE meals IF EXISTS;
 DROP TABLE menus IF EXISTS;
 DROP TABLE restaurants IF EXISTS;
@@ -9,7 +8,7 @@ CREATE TABLE restaurants
     name VARCHAR(255) not null
 
 );
-CREATE UNIQUE INDEX restaurants_name
+CREATE UNIQUE INDEX name
     on restaurants (name);
 
 

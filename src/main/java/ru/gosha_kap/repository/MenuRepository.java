@@ -17,13 +17,13 @@ public interface MenuRepository extends JpaRepository<Menu,Integer> {
     List<Menu> findAllByDateIsLike(LocalDate date);
 
     @EntityGraph(attributePaths = {"restaurant", "meals"})
-    List<Menu> findAllByRestaurantIdOrderByDateDesc(Integer id);
+    List<Menu> findAllByRestaurantId(Integer id);
 
     @EntityGraph(attributePaths = {"restaurant", "meals"})
-    List<Menu> findTop10ByRestaurantIdAndVotesIsGreaterThanOrderByVotesDescDateDesc(int id, int i);
+    List<Menu> findTop10ByRestaurantIdAndVotesIsGreaterThan(int id, int i);
 
     @EntityGraph(attributePaths = {"restaurant", "meals"})
-    List<Menu> findTop10ByVotesGreaterThanOrderByVotesDescDateDesc(int i);
+    List<Menu> findTop10ByVotesGreaterThan(int i);
 
     @EntityGraph(attributePaths = {"restaurant", "meals"})
     @Query("select m from Menu m where m.votes>0 and m.date<>?1")

@@ -1,7 +1,6 @@
 package ru.gosha_kap.util;
 
 import ru.gosha_kap.model.Menu;
-import ru.gosha_kap.to.MealTo;
 import ru.gosha_kap.to.RestrntFullInfo;
 import ru.gosha_kap.to.RestrntVoteHistory;
 import ru.gosha_kap.to.RestrntVoteInfo;
@@ -17,13 +16,16 @@ public class MenuUtil {
 
     public static List<RestrntFullInfo> getAll(Collection<Menu> menus) {
         return menus.stream().map(MenuUtil::createRestaurantInfo).
-                sorted(Comparator.comparing(RestrntFullInfo::getVoted).reversed()).
+                sorted(Comparator.comparing(RestrntFullInfo::getVoted).reversed()
+                        .thenComparing(Comparator.comparing(RestrntFullInfo::getRestaurant_name))
+                        .thenComparing(Comparator.comparing(RestrntFullInfo::getDate).reversed())).
                 collect(Collectors.toList());
     }
 
     public static List<RestrntFullInfo> getAllForOne(Collection<Menu> menus) {
-        return menus.stream().map(MenuUtil::createRestaurantInfo).
-                collect(Collectors.toList());
+        return menus.stream().map(MenuUtil::createRestaurantInfo)
+                .sorted(Comparator.comparing(RestrntFullInfo::getDate).reversed())
+                .collect(Collectors.toList());
     }
 
     public static List<RestrntVoteHistory> getVoteHistory(Collection<Menu> menus) {
@@ -38,16 +40,16 @@ public class MenuUtil {
                 sorted(Comparator.comparing(RestrntVoteHistory::getDate).reversed()).collect(Collectors.toList());
     }
 
-    private static RestrntFullInfo createRestaurantInfo(Menu menu) {
+    public static RestrntFullInfo createRestaurantInfo(Menu menu) {
         return new RestrntFullInfo(menu.getRestaurant().getId(),
                 menu.getRestaurant().getName(),
                 menu.getDate(),
                 menu.getVotes(),
-                menu.getMeals().stream().map(meal -> new MealTo(meal.getDescription(), meal.getPrice())).
-                        collect(Collectors.toList()));
+                menu.getId(),
+                menu.getMeals());
     }
 
-    private static RestrntVoteHistory createHistoryItem(LocalDate date, List<RestrntVoteInfo> list) {
+    public static RestrntVoteHistory createHistoryItem(LocalDate date, List<RestrntVoteInfo> list) {
         return new RestrntVoteHistory(date, list.stream().sorted(Comparator.comparing(RestrntVoteInfo::getVoted).reversed()).collect(Collectors.toList()));
     }
 

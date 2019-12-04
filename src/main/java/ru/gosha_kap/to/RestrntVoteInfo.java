@@ -1,6 +1,8 @@
 package ru.gosha_kap.to;
 
 
+import java.util.Objects;
+
 public class RestrntVoteInfo {
 
     private int voted;
@@ -15,6 +17,8 @@ public class RestrntVoteInfo {
         this.menuID = menuID;
     }
 
+    public RestrntVoteInfo() {
+    }
 
     public int getRestaurntID() {
         return restaurntID;
@@ -49,11 +53,26 @@ public class RestrntVoteInfo {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        RestrntVoteInfo that = (RestrntVoteInfo) o;
+        return voted == that.voted &&
+                restaurntID == that.restaurntID &&
+                menuID == that.menuID &&
+                Objects.equals(restaurantName, that.restaurantName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(voted, restaurantName, restaurntID, menuID);
+    }
+
+    @Override
     public String toString() {
-        return "{" +
+        return "RestrntVoteInfo{" +
                 "voted=" + voted +
                 ", restaurantName='" + restaurantName + '\'' +
-                ", id=" + restaurntID +
                 '}';
     }
 }

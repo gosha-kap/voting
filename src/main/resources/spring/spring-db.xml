@@ -18,13 +18,15 @@
 
     <context:component-scan base-package="ru.gosha_kap.service"/>
 
-    <jpa:repositories base-package="ru.gosha_kap.repository"/>
-
+    <context:component-scan base-package="ru.gosha_kap.repository"/>
 
     <jdbc:initialize-database data-source="dataSource" enabled="${database.init}">
-        <jdbc:script location="classpath:**/db/init.sql"/>
+        <jdbc:script location="classpath:/db/init.sql"/>
         <jdbc:script encoding="utf-8" location="classpath:db/populate.sql"/>
     </jdbc:initialize-database>
+
+    <jpa:repositories base-package="ru.gosha_kap.repository"/>
+
 
     <bean id="dataSource"
           class="org.springframework.jdbc.datasource.DriverManagerDataSource"
@@ -60,6 +62,8 @@
 
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
           p:entityManagerFactory-ref="entityManagerFactory"/>
+
+    <bean class="ru.gosha_kap.util.JpaUtil"/>
 
     <bean id="ehCacheManager" class="org.springframework.cache.jcache.JCacheCacheManager">
         <property name="cacheManager">
