@@ -1,16 +1,31 @@
-DELETE
-FROM restaurants;
-DELETE
-FROM meals;
-DELETE
-FROM menus;
+DELETE FROM restaurants;
+DELETE FROM meals;
+DELETE FROM menus;
+DELETE FROM user_roles;
+DELETE FROM users;
 
 
-ALTER TABLE restaurants
-    ALTER COLUMN ID restart with 1;
-ALTER TABLE MENUS
-    ALTER COLUMN ID restart with 1;
-ALTER TABLE MEALS ALTER COLUMN ID restart with 1;
+ALTER TABLE restaurants  ALTER COLUMN ID restart with 1;
+ALTER TABLE menus ALTER COLUMN ID restart with 1;
+ALTER TABLE meals ALTER COLUMN ID restart with 1;
+ALTER TABLE users ALTER COLUMN ID restart with 1;
+
+
+INSERT INTO users (login,password,registered) VALUES
+('user1','pass','2015-05-30 10:00:00'),
+('user2','pass','2015-05-30 11:00:00'),
+('user3','pass','2015-05-30 12:00:00'),
+('user4','pass','2015-05-30 13:00:00'),
+('admin','111','2015-05-30 14:00:00');
+
+INSERT INTO user_roles (role, user_id) VALUES
+('ROLE_USER', 1),
+('ROLE_USER', 2),
+('ROLE_USER', 3),
+('ROLE_USER', 4),
+('ROLE_ADMIN', 5),
+('ROLE_USER', 5);
+
 
 INSERT INTO RESTAURANTS (name)
 VALUES ('Ashan'),

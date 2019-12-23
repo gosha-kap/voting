@@ -12,11 +12,8 @@
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
        http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
 
-    <cache:annotation-driven cache-manager="ehCacheManager"/>
 
     <context:property-placeholder location="classpath:db/db.properties" system-properties-mode="OVERRIDE"/>
-
-    <context:component-scan base-package="ru.gosha_kap.service"/>
 
     <context:component-scan base-package="ru.gosha_kap.repository"/>
 
@@ -63,12 +60,5 @@
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
           p:entityManagerFactory-ref="entityManagerFactory"/>
 
-    <bean class="ru.gosha_kap.util.JpaUtil"/>
 
-    <bean id="ehCacheManager" class="org.springframework.cache.jcache.JCacheCacheManager">
-        <property name="cacheManager">
-            <bean class="org.springframework.cache.jcache.JCacheManagerFactoryBean"
-                  p:cacheManagerUri="classpath:cache/ehcache.xml"/>
-        </property>
-    </bean>
 </beans>
