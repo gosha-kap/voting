@@ -7,7 +7,13 @@ import java.util.List;
 
 public interface RestaurantService {
 
-List<Restaurant> getAll();
+    List<Restaurant> getAll();
 
+    Restaurant get(int id);
 
+    void create(Restaurant restaurant);
+
+    void update(Restaurant restaurant, int restaurantID);
+
+    void delete(int restaurantID);
 }

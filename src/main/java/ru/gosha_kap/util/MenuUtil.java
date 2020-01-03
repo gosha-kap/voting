@@ -1,6 +1,7 @@
 package ru.gosha_kap.util;
 
 import ru.gosha_kap.model.Menu;
+import ru.gosha_kap.model.Restaurant;
 import ru.gosha_kap.to.RestrntFullInfo;
 import ru.gosha_kap.to.RestrntVoteHistory;
 import ru.gosha_kap.to.RestrntVoteInfo;
@@ -53,5 +54,9 @@ public class MenuUtil {
         return new RestrntVoteHistory(date, list.stream().sorted(Comparator.comparing(RestrntVoteInfo::getVoted).reversed()).collect(Collectors.toList()));
     }
 
+    public static Restaurant prepareToUpdate(Restaurant original, Restaurant restaurant){
+        original.setName(restaurant.getName());
+        return original;
+    }
 
 }

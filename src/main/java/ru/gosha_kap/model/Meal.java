@@ -10,12 +10,12 @@ import java.util.Objects;
 
 @Entity
 @Table(name="meals")
-public class Meal {
+public class Meal implements hasID{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
-    private int id;
+    private Integer id;
 
     @Column(name="description")
     @NotBlank
@@ -27,6 +27,7 @@ public class Meal {
 
     @ManyToOne
     @JoinColumn(name = "menu_id")
+    @JsonIgnore
     private Menu menu;
 
     public Meal() {
@@ -37,14 +38,25 @@ public class Meal {
         this.price = price;
     }
 
-    public Meal(int id, String description, int price) {
+    public Meal(Integer id, String description, int price) {
         this.id = id;
         this.description = description;
         this.price = price;
     }
 
-    public int getId() {
+    public Meal(@NotBlank String description, @NotNull int price, Menu menu) {
+        this.description = description;
+        this.price = price;
+        this.menu = menu;
+    }
+
+    public Integer getId() {
         return id;
+    }
+
+    @Override
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getDescription() {
@@ -62,6 +74,16 @@ public class Meal {
     public void setPrice(int price) {
         this.price = price;
     }
+
+    public Menu getMenu() {
+        return menu;
+    }
+
+    public void setMenu(Menu menu) {
+        this.menu = menu;
+    }
+
+
 
     @Override
     public String toString() {

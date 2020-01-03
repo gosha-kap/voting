@@ -2,6 +2,7 @@ package ru.gosha_kap.repository;
 
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import ru.gosha_kap.model.Menu;
@@ -29,6 +30,19 @@ public interface MenuRepository extends JpaRepository<Menu,Integer> {
     @Query("select m from Menu m where m.votes>0 and m.date<>?1")
     List<Menu> getHistoryVoting(LocalDate localDate);
 
+    @EntityGraph(attributePaths = {"restaurant", "meals"})
+    @Query("select m from Menu m where m.restaurant.id=?2 and m.date=?1")
+    Menu getTodayInfo(LocalDate date, int id);
+
+    @Modifying
+    @Query("delete from Menu m where m.restaurant.id=?1 and m.date=?2")
+    void deleteTodayMenu(int id,LocalDate date);
 
 
+    Menu findByRestaurantIdAndDateIsLike(int id, LocalDate date);
+
+    @Modifying
+    @EntityGraph(attributePaths = {"restaurant", "meals"})
+    @Query("update  Menu m set m.votes = ?2 where  m.restaurant.id = ?1 and m.date =?3 ")
+    void updateVote(int resataurant_id,int rating, LocalDate date);
 }

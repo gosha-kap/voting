@@ -11,12 +11,12 @@ ALTER TABLE meals ALTER COLUMN ID restart with 1;
 ALTER TABLE users ALTER COLUMN ID restart with 1;
 
 
-INSERT INTO users (login,password,registered) VALUES
-('user1','pass','2015-05-30 10:00:00'),
-('user2','pass','2015-05-30 11:00:00'),
-('user3','pass','2015-05-30 12:00:00'),
-('user4','pass','2015-05-30 13:00:00'),
-('admin','111','2015-05-30 14:00:00');
+INSERT INTO users (login,password,name,surname,registered) VALUES
+('user1','{noop}pass','name1','surname1','2015-05-30 10:00:00'),
+('user2','{noop}pass','name2','surname2','2015-05-30 11:00:00'),
+('user3','{noop}pass','name3','surname3','2015-05-30 12:00:00'),
+('user4','{noop}pass','name4','surname4','2015-05-30 13:00:00'),
+('admin','{noop}111','name5','surname5','2015-05-30 14:00:00');
 
 INSERT INTO user_roles (role, user_id) VALUES
 ('ROLE_USER', 1),
@@ -104,4 +104,6 @@ VALUES ('Картошка', 500, 1),
        ('Брутуч', 1002, 15),
        ('Пенце', 702, 15);
 
+insert into VOTING_HISTORY(user_id, restaurant_id) values
+(3,3),(4,3),(2,1);
 

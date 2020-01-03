@@ -23,6 +23,7 @@
 
 
     <cache alias="history" uses-template="myDefault"/>
+    <cache alias="menuCache" uses-template="myDefault"/>
 
 
 </config>

@@ -39,6 +39,8 @@ CREATE TABLE users
     id       INTEGER IDENTITY PRIMARY KEY,
     login    varchar(255) not null,
     password varchar(255) not null,
+    name varchar(255) not null,
+    surname varchar(255) not null,
     enabled    BOOLEAN DEFAULT TRUE    NOT NULL,
     registered  TIMESTAMP DEFAULT now() NOT NULL
 );
@@ -53,12 +55,13 @@ CREATE TABLE user_roles
 
 CREATE TABLE voting_history
 (
-    user_id        INTEGER                 not null,
-    restaurant_val INTEGER           not null,
-    date           TIMESTAMP DEFAULT now() NOT NULL,
+    user_id        INTEGER           not null,
+    restaurant_id INTEGER           not null,
+    votedDate     date DEFAULT now() NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
-    FOREIGN KEY (restaurant_val) REFERENCES restaurants (id) ON DELETE CASCADE
+    FOREIGN KEY (restaurant_id) REFERENCES restaurants (id) ON DELETE CASCADE
 );
+CREATE UNIQUE INDEX uservote ON voting_history (user_id, votedDate);
 
 
 

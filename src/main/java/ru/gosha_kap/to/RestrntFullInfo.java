@@ -12,7 +12,7 @@ public class RestrntFullInfo {
 
     private String restaurant_name;
 
-    private LocalDate date;
+    private LocalDate menuDate;
 
     private int voted;
 
@@ -27,8 +27,9 @@ public class RestrntFullInfo {
         this.voted = voted;
         this.menu = meals;
         this.menu_id = menu_id;
-        this.date = date;
+        this.menuDate = date;
     }
+
 
     public RestrntFullInfo() {
     }
@@ -74,11 +75,11 @@ public class RestrntFullInfo {
     }
 
     public LocalDate getDate() {
-        return date;
+        return menuDate;
     }
 
     public void setDate(LocalDate date) {
-        this.date = date;
+        this.menuDate = date;
     }
 
 
@@ -91,12 +92,12 @@ public class RestrntFullInfo {
                 voted == that.voted &&
                 menu_id == that.menu_id &&
                 restaurant_name.equals(that.restaurant_name) &&
-                date.equals(that.date);
+                menuDate.equals(that.menuDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(restaurant_id, restaurant_name, date, voted, menu_id);
+        return Objects.hash(restaurant_id, restaurant_name, menuDate, voted, menu_id);
     }
 
 

@@ -1,22 +1,27 @@
 package ru.gosha_kap.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Entity
 @Table(name = "restaurants")
-public class Restaurant {
+public class Restaurant implements hasID {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Integer id;
 
     @Column(name = "name")
+    @NotNull
     private String name;
-
-    @OneToOne(mappedBy = "restaurant")
-    private Menu menu;
+/*
+    @OneToOne(mappedBy = "restaurant",fetch = FetchType.LAZY)
+    private Menu menu;*/
 
     public Restaurant(String name) {
         this.name = name;
@@ -30,16 +35,21 @@ public class Restaurant {
     public Restaurant() {
     }
 
-    public Menu getMenu() {
+ /*   public Menu getMenu() {
         return menu;
-    }
+    }*/
 
-    public void setMenu(Menu menu) {
+/*    public void setMenu(Menu menu) {
         this.menu = menu;
+    }*/
+
+    public Integer getId() {
+        return id;
     }
 
-    public int getId() {
-        return id;
+    @Override
+    public void setId(Integer id) {
+
     }
 
     public String getName() {
@@ -54,7 +64,7 @@ public class Restaurant {
     public String toString() {
         return "Restaurant{" +
                 " name='" + name + '\'' +
-                ", menu=" + menu +
+          //      ", menu=" + menu +
                 '}';
     }
 
