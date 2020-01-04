@@ -1,22 +1,32 @@
 package ru.gosha_kap.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
+import javax.persistence.Embeddable;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
+
+@Embeddable
 public class Vote implements Serializable {
 
-
+    @NotNull
     private Integer user_id;
 
-    private  Integer restaurant_id;
-
+    @NotNull
     private LocalDate votedDate;
 
     public Vote() {
+    }
+
+    public Vote(Integer user_id) {
+        this.user_id = user_id;
+        this.votedDate = LocalDate.now();
+      }
+
+    public Vote(@NotNull Integer user_id, @NotNull LocalDate votedDate) {
+        this.user_id = user_id;
+        this.votedDate = votedDate;
     }
 
     public Integer getUser_id() {
@@ -27,14 +37,6 @@ public class Vote implements Serializable {
         this.user_id = user_id;
     }
 
-    public Integer getRestaurant_id() {
-        return restaurant_id;
-    }
-
-    public void setRestaurant_id(Integer restaurant_id) {
-        this.restaurant_id = restaurant_id;
-    }
-
     public LocalDate getVotedDate() {
         return votedDate;
     }
@@ -43,27 +45,18 @@ public class Vote implements Serializable {
         this.votedDate = votedDate;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Vote vote = (Vote) o;
-        return Objects.equals(user_id, vote.user_id) &&
-                Objects.equals(restaurant_id, vote.restaurant_id) &&
-                Objects.equals(votedDate, vote.votedDate);
+        return user_id.equals(vote.user_id) &&
+                votedDate.equals(vote.votedDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(user_id, restaurant_id, votedDate);
-    }
-
-    @Override
-    public String toString() {
-        return "Vote{" +
-                "user_id=" + user_id +
-                ", restaurant_id=" + restaurant_id +
-                ", date=" + votedDate +
-                '}';
+        return Objects.hash(user_id, votedDate);
     }
 }

@@ -5,8 +5,9 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.gosha_kap.model.Vote;
 import ru.gosha_kap.model.VoteEntity;
-import ru.gosha_kap.repository.VoteRepository;
+import ru.gosha_kap.repository.VoteJPARepository;
 
 import java.time.LocalTime;
 import java.util.List;
@@ -19,7 +20,7 @@ public class VoteService {
     private final LocalTime MAX_VOTE_TIME = LocalTime.of(23,0,0);
 
     @Autowired
-    private VoteRepository voteRepository;
+    private VoteJPARepository voteJPARepository;
 
     public boolean checkTime(){
         if(LocalTime.now().isAfter(MAX_VOTE_TIME)) return false;
@@ -28,10 +29,10 @@ public class VoteService {
 
     @Transactional
     public void vote(int authUserId, int id) {
-        voteRepository.makeVote(authUserId,id);
+         voteJPARepository.save(new VoteEntity(new Vote(authUserId),id));
     }
 
     public List<VoteEntity> getHistoryForUser(int authUserId) {
-       return voteRepository.getUserHistory(authUserId);
+         return voteJPARepository.showHistory(authUserId);
     }
 }

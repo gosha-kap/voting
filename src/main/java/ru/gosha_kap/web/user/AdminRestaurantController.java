@@ -17,13 +17,8 @@ import ru.gosha_kap.service.RestaurantService;
 import ru.gosha_kap.to.RestrntFullInfo;
 import ru.gosha_kap.util.MenuUtil;
 
-import java.net.URI;
 import java.util.List;
 import java.util.Objects;
-
-import static ru.gosha_kap.util.ValidationUtil.assureIdConsistent;
-import static ru.gosha_kap.util.ValidationUtil.checkNew;
-
 
 @RestController
 @RequestMapping(value ="/rest/admin/restaurants",produces = MediaType.APPLICATION_JSON_VALUE)

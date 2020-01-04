@@ -22,13 +22,11 @@ import static ru.gosha_kap.util.SecurityUtil.authUserId;
 @RequestMapping(value ="/rest/profile",produces = MediaType.APPLICATION_JSON_VALUE)
 public class UserController extends AbstractUserController {
 
-
     @Autowired
     private MenuService menuService;
 
     @Autowired
     private VoteService voteService;
-
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public User get() {

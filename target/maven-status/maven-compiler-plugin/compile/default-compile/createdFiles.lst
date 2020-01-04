@@ -17,7 +17,6 @@ ru/gosha_kap/to/RestrntFullInfo.class
 ru/gosha_kap/util/exception/NotFoundException.class
 ru/gosha_kap/util/JpaUtil.class
 ru/gosha_kap/util/exception/IllegalRequestDataException.class
-ru/gosha_kap/repository/VoteRepository.class
 ru/gosha_kap/to/RestrntVoteInfo.class
 ru/gosha_kap/web/user/AdminUserController.class
 ru/gosha_kap/repository/RestaurantRepository.class
@@ -26,6 +25,7 @@ ru/gosha_kap/to/RestrntVoteHistory.class
 ru/gosha_kap/model/Restaurant.class
 ru/gosha_kap/util/UserUtil.class
 ru/gosha_kap/util/MenuUtil.class
+ru/gosha_kap/repository/VoteJPARepository.class
 ru/gosha_kap/service/VoteService.class
 ru/gosha_kap/web/user/UserController.class
 ru/gosha_kap/util/json/JsonUtil.class

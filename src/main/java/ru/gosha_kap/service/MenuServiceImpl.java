@@ -8,9 +8,8 @@ import org.springframework.util.Assert;
 import ru.gosha_kap.model.*;
 import ru.gosha_kap.repository.MealRepository;
 import ru.gosha_kap.repository.MenuRepository;
-import ru.gosha_kap.repository.VoteRepository;
+import ru.gosha_kap.repository.VoteJPARepository;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
@@ -33,7 +32,7 @@ public class MenuServiceImpl implements MenuService {
     private MealRepository mealRepository;
 
     @Autowired
-    private VoteRepository voteRepository;
+    private VoteJPARepository voteJPARepository;
 
 
 
@@ -121,7 +120,7 @@ public class MenuServiceImpl implements MenuService {
     @Override
     @Transactional
     public void updateVotes() {
-        List<VoteEntity> votes = voteRepository.getTodayResult();
+        List<VoteEntity> votes = voteJPARepository.getTodayResult(LocalDate.now());
         Map<Integer,Integer> result = new HashMap<>();
         votes.stream().forEach(x->{
             result.merge(x.getRestaurant_id(),1,Integer::sum);

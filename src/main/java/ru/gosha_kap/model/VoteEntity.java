@@ -1,41 +1,42 @@
 package ru.gosha_kap.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
-@IdClass(Vote.class)
+@Table(name = "voting_history")
 public class VoteEntity {
 
-    @Id
-    private int user_id;
 
-    @Id
-    private LocalDate votedDate = LocalDate.now();
+    @EmbeddedId
+    private Vote vote;
 
 
+    @NotNull
     private int restaurant_id;
 
     public VoteEntity() {
     }
 
-    public VoteEntity(int user_id, int restaurant_id) {
-        this.user_id = user_id;
+    public VoteEntity(Vote vote, @NotNull int restaurant_id) {
+        this.vote = vote;
         this.restaurant_id = restaurant_id;
-
     }
 
-    public int getUser_id() {
-        return user_id;
+    public Vote getVote() {
+        return vote;
     }
 
-    public LocalDate getDate() {
-        return votedDate;
+    public void setVote(Vote vote) {
+        this.vote = vote;
     }
 
     public int getRestaurant_id() {
         return restaurant_id;
+    }
+
+    public void setRestaurant_id(int restaurant_id) {
+        this.restaurant_id = restaurant_id;
     }
 }

@@ -12,19 +12,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
-import org.springframework.util.StringUtils;
 import ru.gosha_kap.AuthorizedUser;
-import ru.gosha_kap.model.Restaurant;
-import ru.gosha_kap.model.Role;
 import ru.gosha_kap.model.User;
 import ru.gosha_kap.repository.UserRepository;
-import ru.gosha_kap.repository.VoteRepository;
 import ru.gosha_kap.util.UserUtil;
 
-import java.time.LocalTime;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import static ru.gosha_kap.util.ValidationUtil.*;
 
@@ -40,9 +33,6 @@ public class UserService implements UserDetailsService{
 
     @Autowired
     private  PasswordEncoder passwordEncoder;
-
-    @Autowired
-    private VoteRepository voteRepository;
 
     @Autowired
     private RestaurantService restaurantService;
