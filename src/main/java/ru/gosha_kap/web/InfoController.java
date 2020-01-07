@@ -14,7 +14,7 @@ import ru.gosha_kap.util.MenuUtil;
 import java.util.List;
 
 @RestController
-@RequestMapping("/info")
+@RequestMapping("rest/info")
 public class InfoController {
 
     @Autowired

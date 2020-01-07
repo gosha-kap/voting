@@ -17,4 +17,7 @@ public interface RestaurantRepository extends JpaRepository<Restaurant,Integer> 
     @Query("select r from Restaurant r where r.id=?1")
     Restaurant getRestaurant(int id);
 
+    @Query("select r.timezone from Restaurant r where r.id=?1")
+    String getTZ(int id);
+
 }

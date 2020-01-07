@@ -8,7 +8,8 @@ DROP TABLE restaurants IF EXISTS;
 CREATE TABLE restaurants
 (
     id   INTEGER IDENTITY PRIMARY KEY,
-    name VARCHAR(255) not null
+    name VARCHAR(255) not null,
+    timezone varchar(10) not null
 
 );
 CREATE UNIQUE INDEX name
@@ -44,6 +45,9 @@ CREATE TABLE users
     enabled    BOOLEAN DEFAULT TRUE    NOT NULL,
     registered  TIMESTAMP DEFAULT now() NOT NULL
 );
+
+CREATE UNIQUE INDEX login
+    on users (login);
 
 CREATE TABLE user_roles
 (

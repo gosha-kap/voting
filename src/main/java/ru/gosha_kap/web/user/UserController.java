@@ -22,6 +22,8 @@ import static ru.gosha_kap.util.SecurityUtil.authUserId;
 @RequestMapping(value ="/rest/profile",produces = MediaType.APPLICATION_JSON_VALUE)
 public class UserController extends AbstractUserController {
 
+    private final int BORDER_TIME = 11;
+
     @Autowired
     private MenuService menuService;
 
@@ -51,9 +53,9 @@ public class UserController extends AbstractUserController {
 
     @GetMapping(value="/vote",consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> vote(@RequestParam int id){
-       // if(voteService.checkTime())
-       //     return new ResponseEntity<>("You can't vote after 11:00",HttpStatus.ACCEPTED);
         menuService.checkTodayMenu(id);
+        if(!voteService.checkTime(id,BORDER_TIME))
+            return new ResponseEntity<>("You can't vote after "+BORDER_TIME+":00",HttpStatus.ACCEPTED);
         voteService.vote(authUserId(),id);
         menuService.updateVotes();
         return new ResponseEntity<>("You  voted  for restaurant with id="+id,HttpStatus.ACCEPTED);

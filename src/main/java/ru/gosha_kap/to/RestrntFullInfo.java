@@ -30,7 +30,6 @@ public class RestrntFullInfo {
         this.menuDate = date;
     }
 
-
     public RestrntFullInfo() {
     }
 
@@ -101,4 +100,15 @@ public class RestrntFullInfo {
     }
 
 
+    @Override
+    public String toString() {
+        return "RestrntFullInfo{" +
+                "restaurant_id=" + restaurant_id +
+                ", restaurant_name='" + restaurant_name + '\'' +
+                ", menuDate=" + menuDate +
+                ", voted=" + voted +
+                ", menu_id=" + menu_id +
+                ", menu=" + menu +
+                '}';
+    }
 }

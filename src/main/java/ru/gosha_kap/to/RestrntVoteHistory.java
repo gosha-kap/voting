@@ -14,9 +14,6 @@ public class RestrntVoteHistory {
         this.voteResult = tops;
     }
 
-    public RestrntVoteHistory() {
-    }
-
     public LocalDate getDate() {
         return date;
     }
@@ -25,6 +22,18 @@ public class RestrntVoteHistory {
         return voteResult;
     }
 
+
+    public RestrntVoteHistory() {
+    }
+
+
+    @Override
+    public String toString() {
+        return "RestrntVoteHistory{" +
+                "date=" + date +
+                ", voteResult=" + voteResult +
+                '}';
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -40,11 +49,5 @@ public class RestrntVoteHistory {
         return Objects.hash(date, voteResult);
     }
 
-    @Override
-    public String toString() {
-        return "RestrntVoteHistory{" +
-                "date=" + date +
-                ", voteResult=" + voteResult +
-                '}';
-    }
+
 }

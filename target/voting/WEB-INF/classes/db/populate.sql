@@ -27,11 +27,11 @@ INSERT INTO user_roles (role, user_id) VALUES
 ('ROLE_USER', 5);
 
 
-INSERT INTO RESTAURANTS (name)
-VALUES ('Ashan'),
-       ('Mishan'),
-       ('Ravshan'),
-       ('Goshan');
+INSERT INTO RESTAURANTS (name,timezone)
+VALUES ('Ashan','GMT+12:00'),
+       ('Mishan','GMT+11:00'),
+       ('Ravshan','GMT+10:00'),
+       ('Goshan','GMT+9:00');
 
 INSERT into MENUS (DATE, RESTAURANT_ID, votes)
 values ('2015-05-29', 1, 4),

@@ -5,7 +5,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.time.ZoneId;
 import java.util.Objects;
+import java.util.TimeZone;
 
 @Entity
 @Table(name = "restaurants")
@@ -19,29 +21,26 @@ public class Restaurant implements hasID {
     @Column(name = "name")
     @NotNull
     private String name;
-/*
-    @OneToOne(mappedBy = "restaurant",fetch = FetchType.LAZY)
-    private Menu menu;*/
 
-    public Restaurant(String name) {
-        this.name = name;
-    }
+    @Column(name = "timezone")
+    @NotNull
+    private String timezone;
+
+
 
     public Restaurant(int id, String name) {
         this.id = id;
         this.name = name;
     }
 
+    public Restaurant(String name, String timezone) {
+        this.name = name;
+        this.timezone = timezone;
+    }
+
     public Restaurant() {
     }
 
- /*   public Menu getMenu() {
-        return menu;
-    }*/
-
-/*    public void setMenu(Menu menu) {
-        this.menu = menu;
-    }*/
 
     public Integer getId() {
         return id;
@@ -60,13 +59,7 @@ public class Restaurant implements hasID {
         this.name = name;
     }
 
-    @Override
-    public String toString() {
-        return "Restaurant{" +
-                " name='" + name + '\'' +
-          //      ", menu=" + menu +
-                '}';
-    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -79,5 +72,13 @@ public class Restaurant implements hasID {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    public String getTimezone() {
+        return timezone;
+    }
+
+    public void setTimezone(String timezone) {
+        this.timezone = timezone;
     }
 }

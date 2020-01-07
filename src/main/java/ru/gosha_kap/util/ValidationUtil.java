@@ -10,6 +10,8 @@ import ru.gosha_kap.util.exception.IllegalRequestDataException;
 import ru.gosha_kap.util.exception.NotFoundException;
 
 import javax.validation.*;
+import java.time.DateTimeException;
+import java.time.ZoneId;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -31,6 +33,17 @@ public class ValidationUtil {
         checkNotFound(object != null, msg);
         return object;
     }
+
+    public static void checkTimeZone(String timezone){
+        try {
+            ZoneId.of(timezone);
+        }
+        catch(DateTimeException e){
+            throw new IllegalRequestDataException("Invalid timezone:"+timezone);
+        }
+
+    }
+
 
     public static void checkNew(hasID object) {
         if (!object.isNew()) {
@@ -60,9 +73,6 @@ public class ValidationUtil {
      }
 
 
-
-
-    //  http://stackoverflow.com/a/28565320/548473
     public static Throwable getRootCause(Throwable t) {
         Throwable result = t;
         Throwable cause;
@@ -72,6 +82,8 @@ public class ValidationUtil {
         }
         return result;
     }
+
+
 
     private static final Validator validator;
 

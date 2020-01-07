@@ -2,14 +2,15 @@ package ru.gosha_kap;
 
 
 import org.springframework.test.web.servlet.ResultMatcher;
-import ru.gosha_kap.model.Meal;
-import ru.gosha_kap.model.Menu;
-import ru.gosha_kap.model.Restaurant;
+import ru.gosha_kap.model.*;
 import ru.gosha_kap.to.RestrntFullInfo;
 import ru.gosha_kap.to.RestrntVoteHistory;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,6 +18,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static ru.gosha_kap.TestUtil.readListFromJsonMvcResult;
 
 public class TestData {
+
+    public static  Date date1 = new Date();
+    {
+
+        try {
+            date1 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse("2015-05-30 10:00:00");
+        } catch (Exception e) {}
+    }
+
+    public static final User USER1 = new User(1, "user1", "pass", "name1", "surname1",true, date1, Role.ROLE_USER);
+    public static final User ADMIN = new User( "admin", "pass", "name5", "surname5");
+
 
     public static final Meal MEAL_1 = new Meal(1, "Картошка", 500);
     public static final Meal MEAL_2 = new Meal(2, "Суп", 1000);
@@ -88,12 +101,12 @@ public class TestData {
     public static final Menu MENU_11 = new Menu(11, LocalDate.parse("2018-08-29"), 2, RESTAURANT_3, List.of(MEAL_31, MEAL_32, MEAL_33));
     public static final Menu MENU_12 = new Menu(12, LocalDate.parse("2018-08-29"), 1, RESTAURANT_4, List.of(MEAL_34, MEAL_35, MEAL_36));
 
-    public static final Menu MENU_13 = new Menu(13, LocalDate.now(), 0, RESTAURANT_1, List.of(MEAL_37, MEAL_38, MEAL_39));
+    public static final Menu MENU_13 = new Menu(13, LocalDate.now(), 1, RESTAURANT_1, List.of(MEAL_37, MEAL_38, MEAL_39));
     public static final Menu MENU_14 = new Menu(14, LocalDate.now(), 0, RESTAURANT_2, List.of(MEAL_40, MEAL_41, MEAL_42));
-    public static final Menu MENU_15 = new Menu(15, LocalDate.now(), 0, RESTAURANT_3, List.of(MEAL_43, MEAL_44, MEAL_45));
+    public static final Menu MENU_15 = new Menu(15, LocalDate.now(), 2, RESTAURANT_3, List.of(MEAL_43, MEAL_44, MEAL_45));
 
     public static final List<Menu> MENUS_HISTORY = List.of(MENU_1, MENU_2, MENU_3, MENU_4, MENU_5, MENU_6,
-            MENU_7, MENU_8, MENU_9, MENU_10, MENU_11, MENU_12, MENU_13, MENU_14, MENU_15).stream().
+            MENU_7, MENU_8, MENU_9, MENU_10, MENU_11, MENU_12).stream().
             filter(menu -> menu.getVotes() > 0).collect(Collectors.toList());
 
     public static void assertMatch(Menu actual, Menu expected) {
@@ -108,7 +121,6 @@ public class TestData {
         assertThat(actual).usingElementComparator(Comparator.comparing(Menu::getId)).isEqualTo(expected);
     }
 
-
     public static <T> ResultMatcher contentJson(T... expected) {
         return contentJson(List.of(expected));
     }
@@ -118,6 +130,8 @@ public class TestData {
             assertThat(readListFromJsonMvcResult(result, claz)).isEqualTo(expected);
         };
     }
+
+    public static TestMatchers<User> USER_MATCHERS = TestMatchers.useFieldsComparator(User.class, "registered", "pass","roles");
 
 
 }

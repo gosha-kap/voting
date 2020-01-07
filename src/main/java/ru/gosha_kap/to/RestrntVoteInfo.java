@@ -52,6 +52,8 @@ public class RestrntVoteInfo {
         this.menuID = menuID;
     }
 
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -68,11 +70,5 @@ public class RestrntVoteInfo {
         return Objects.hash(voted, restaurantName, restaurntID, menuID);
     }
 
-    @Override
-    public String toString() {
-        return "RestrntVoteInfo{" +
-                "voted=" + voted +
-                ", restaurantName='" + restaurantName + '\'' +
-                '}';
-    }
+
 }

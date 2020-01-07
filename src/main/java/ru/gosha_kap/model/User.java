@@ -66,6 +66,8 @@ public class User implements hasID {
     @Column(name="role")
     private Set<Role> roles = new HashSet<>();
 
+
+
     public User(@NotBlank @Size(min = 2, max = 100) String login, @NotBlank @Size(min = 5, max = 100) String pass, @NotNull Date registered, Set<Role> roles) {
         this.login = login;
         this.pass = pass;
@@ -78,7 +80,17 @@ public class User implements hasID {
         this.pass = pass;
         this.name = name;
         this.surName = surName;
+    }
 
+    public User(int id, String login,  String pass,  String name, String surName, boolean enabled,  Date registered, Role role) {
+        this.id =id;
+        this.login = login;
+        this.pass = pass;
+        this.name = name;
+        this.surName = surName;
+        this.enabled = enabled;
+        this.registered = registered;
+        this.roles.add(role);
     }
 
     public User() {
@@ -90,7 +102,7 @@ public class User implements hasID {
 
     @Override
     public void setId(Integer id) {
-
+        this.id = id;
     }
 
     public void addRole(Role role){

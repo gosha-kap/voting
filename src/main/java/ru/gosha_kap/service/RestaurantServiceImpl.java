@@ -36,6 +36,7 @@ public class RestaurantServiceImpl implements  RestaurantService {
     @Transactional
     public void create(Restaurant restaurant) {
         checkNew(restaurant);
+        checkTimeZone(restaurant.getTimezone());
         repository.save(restaurant);
     }
 

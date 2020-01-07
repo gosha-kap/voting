@@ -63,7 +63,7 @@ public class UserService implements UserDetailsService{
 
     @Transactional
     public void delete(int id) {
-        checkNotFoundWithId(userRepository.delete(id), id);
+        checkNotFoundWithId(userRepository.delete(id)!=0, id);
     }
 
     @Transactional

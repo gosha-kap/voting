@@ -16,6 +16,15 @@ public class JacksonObjectMapper extends ObjectMapper {
     private JacksonObjectMapper() {
         registerModule(new JavaTimeModule());
         configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+
+          setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.NONE);
+          setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
+          setSerializationInclusion(JsonInclude.Include.NON_NULL);
+
+//      https://stackoverflow.com/questions/22875642/jackson-set-default-view
+       // setConfig(getSerializationConfig().withView(View.JsonREST.class));
+
+
     }
 
     public static ObjectMapper getMapper() {
