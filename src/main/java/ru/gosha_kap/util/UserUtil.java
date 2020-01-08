@@ -7,6 +7,8 @@ import ru.gosha_kap.model.User;
 import static org.springframework.util.StringUtils.hasText;
 
 public class UserUtil {
+
+
     public static User prepareToUpDate(User original, User user, PasswordEncoder passwordEncoder) {
 
         if(hasText(user.getName()))

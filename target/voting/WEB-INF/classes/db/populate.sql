@@ -49,9 +49,9 @@ values ('2015-05-29', 1, 4),
        ('2018-08-29', 3, 2),
        ('2018-08-29', 4, 1),
 
-       (now(), 1, 0),
+       (now(), 1, 1),
        (now(), 2, 0),
-       (now(), 3, 0);
+       (now(), 3, 2);
 
 
 INSERT INTO meals (DESCRIPTION, PRICE, MENU_ID)

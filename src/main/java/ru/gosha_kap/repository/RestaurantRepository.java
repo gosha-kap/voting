@@ -11,6 +11,8 @@ import java.util.List;
 public interface RestaurantRepository extends JpaRepository<Restaurant,Integer> {
 
 
+
+
     @Query("select r.id,r.name from Restaurant r")
     List<Restaurant> getRestaurants();
 

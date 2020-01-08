@@ -28,7 +28,7 @@ public class TestData {
     }
 
     public static final User USER1 = new User(1, "user1", "pass", "name1", "surname1",true, date1, Role.ROLE_USER);
-    public static final User ADMIN = new User( "admin", "pass", "name5", "surname5");
+    public static final User ADMIN = new User( "admin", "111", "name5", "surname5");
 
 
     public static final Meal MEAL_1 = new Meal(1, "Картошка", 500);

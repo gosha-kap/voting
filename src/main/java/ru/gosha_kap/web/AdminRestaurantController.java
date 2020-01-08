@@ -12,11 +12,13 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.gosha_kap.model.Meal;
 import ru.gosha_kap.model.Menu;
 import ru.gosha_kap.model.Restaurant;
+import ru.gosha_kap.model.User;
 import ru.gosha_kap.service.MenuService;
 import ru.gosha_kap.service.RestaurantService;
 import ru.gosha_kap.to.RestrntFullInfo;
 import ru.gosha_kap.util.MenuUtil;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Objects;
 
@@ -38,11 +40,27 @@ public class AdminRestaurantController {
         return restaurantService.getAll();
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void createRestaurant(@RequestBody Restaurant restaurant ){
-        log.info("create new restaurant");
-        restaurantService.create(restaurant);
+    @GetMapping(value = "{restaurantID}",produces = MediaType.APPLICATION_JSON_VALUE)
+    public Restaurant getShortInfo(@PathVariable int restaurantID){
+        log.info("get all restaurants");
+        return restaurantService.get(restaurantID);
     }
+
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(value = HttpStatus.CREATED)
+      public ResponseEntity<Restaurant> createRestaurant(@RequestBody Restaurant restaurant ){
+        log.info("create new restaurant");
+        Restaurant restaurantCreated = restaurantService.create(restaurant);
+        URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/rest/admin/restaurants/{id}")
+                .buildAndExpand(restaurantCreated.getId()).toUri();
+        return ResponseEntity.created(uriOfNewResource).body(restaurantCreated);
+
+    }
+
+
+
+
 
     @PutMapping(value = "{restaurantID}",consumes = MediaType.APPLICATION_JSON_VALUE)
     public void updateRestaurant(@PathVariable int restaurantID, @RequestBody Restaurant restaurant ){
@@ -56,14 +74,14 @@ public class AdminRestaurantController {
         restaurantService.delete(restaurantID);
     }
 
-    @GetMapping(value = {"{restaurantID}","{restaurantID}/meals"},consumes = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = {"{restaurantID}/meals"},consumes = MediaType.APPLICATION_JSON_VALUE)
     public RestrntFullInfo get(@PathVariable int restaurantID){
         log.info("get  info with restaurantID="+restaurantID);
         return MenuUtil.createRestaurantInfo(getTodayMenu(restaurantID));
     }
 
     @PostMapping(value = "{restaurantID}/meals",consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    @ResponseStatus(value = HttpStatus.CREATED)
     public void createMeal(@PathVariable int restaurantID , @RequestBody Meal meal){
         log.info("create meal for menu  with restaurantID="+restaurantID);
         menuService.createMeal(meal,getTodayMenu(restaurantID));

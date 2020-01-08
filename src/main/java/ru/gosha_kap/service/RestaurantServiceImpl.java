@@ -34,10 +34,11 @@ public class RestaurantServiceImpl implements  RestaurantService {
 
     @Override
     @Transactional
-    public void create(Restaurant restaurant) {
+    public Restaurant create(Restaurant restaurant) {
         checkNew(restaurant);
         checkTimeZone(restaurant.getTimezone());
-        repository.save(restaurant);
+       return repository.save(restaurant);
+
     }
 
     @Override

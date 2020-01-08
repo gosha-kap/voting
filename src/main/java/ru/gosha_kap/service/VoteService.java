@@ -1,6 +1,7 @@
 package ru.gosha_kap.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,7 @@ import ru.gosha_kap.model.VoteEntity;
 import ru.gosha_kap.repository.RestaurantRepository;
 import ru.gosha_kap.repository.VoteJPARepository;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -28,11 +30,20 @@ public class VoteService {
     @Autowired
     private RestaurantRepository restaurantRepository;
 
-    public boolean checkTime(int restaurantId,int time){
+
+    @Value( "${vote.border.hour}" )
+    private Integer voteLimitHour;
+
+    @Value( "${vote.border.minutes}" )
+    private Integer voteLimitMinutes;
+
+    public boolean checkTime(int restaurantId){
 
         String restaurantTZ = restaurantRepository.getTZ(restaurantId);
         ZonedDateTime restaurantTime = ZonedDateTime.now(ZoneId.of(restaurantTZ));
-        if(restaurantTime.getHour() > time) return false;
+        ZonedDateTime voteLimitTime = ZonedDateTime.of(LocalDate.now(),LocalTime.of(voteLimitHour,voteLimitMinutes),ZoneId.of(restaurantTZ));
+
+        if(restaurantTime.isAfter(voteLimitTime)) return false;
         return true;
     }
 

@@ -80,6 +80,10 @@ abstract public class AbstractTestController {
         return wrap(MockMvcRequestBuilders.get(url));
     }
 
+    protected RequestWrapper doGetwithoutRoot(String url) {
+        return wrap(MockMvcRequestBuilders.get(url));
+    }
+
     protected RequestWrapper doGet(String pad) {
         return wrap(MockMvcRequestBuilders.get(url + pad));
     }
@@ -95,7 +99,7 @@ abstract public class AbstractTestController {
     }
 
     protected RequestWrapper doDelete(int id) {
-        return wrap(MockMvcRequestBuilders.delete(url + "{id}", id));
+        return wrap(MockMvcRequestBuilders.delete(url + "/{id}", id).contentType(MediaType.APPLICATION_JSON));
     }
 
     protected RequestWrapper doPut() {
@@ -103,9 +107,13 @@ abstract public class AbstractTestController {
     }
 
     protected RequestWrapper doPut(int id) {
-        return wrap(MockMvcRequestBuilders.put(url + "{id}", id));
+        return wrap(MockMvcRequestBuilders.put(url + "/{id}", id));
     }
 
+
+    protected RequestWrapper doPutwithParam(int id,String paramName, String paramValue){
+        return wrap(MockMvcRequestBuilders.patch(url+"/"+id).param(paramName,paramValue).contentType(MediaType.APPLICATION_JSON));
+    }
     protected RequestWrapper doPost(String pad) throws Exception {
         return wrap(MockMvcRequestBuilders.post(url + pad));
     }

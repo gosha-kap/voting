@@ -1,6 +1,7 @@
 package ru.gosha_kap.web.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -22,13 +23,14 @@ import static ru.gosha_kap.util.SecurityUtil.authUserId;
 @RequestMapping(value ="/rest/profile",produces = MediaType.APPLICATION_JSON_VALUE)
 public class UserController extends AbstractUserController {
 
-    private final int BORDER_TIME = 11;
+
 
     @Autowired
     private MenuService menuService;
 
     @Autowired
     private VoteService voteService;
+
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public User get() {
@@ -54,11 +56,11 @@ public class UserController extends AbstractUserController {
     @GetMapping(value="/vote",consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> vote(@RequestParam int id){
         menuService.checkTodayMenu(id);
-        if(!voteService.checkTime(id,BORDER_TIME))
-            return new ResponseEntity<>("You can't vote after "+BORDER_TIME+":00",HttpStatus.ACCEPTED);
+        if(!voteService.checkTime(id))
+            return new ResponseEntity<>("Sorry. It's too late to vote",HttpStatus.ACCEPTED);
         voteService.vote(authUserId(),id);
         menuService.updateVotes();
-        return new ResponseEntity<>("You  voted  for restaurant with id="+id,HttpStatus.ACCEPTED);
+        return new ResponseEntity<>("You  voted  for restaurant with id = "+id,HttpStatus.ACCEPTED);
 
     }
 

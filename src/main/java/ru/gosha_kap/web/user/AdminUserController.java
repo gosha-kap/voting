@@ -12,37 +12,37 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping(value ="/rest/admin",produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value ="/rest/admin/users",produces = MediaType.APPLICATION_JSON_VALUE)
 public class AdminUserController extends AbstractUserController {
 
 
-    @GetMapping("/users")
+    @GetMapping
     public List<User> getAll() {
         return super.getAll();
     }
 
 
-    @DeleteMapping(value = "/users/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = "{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable int id) {
         super.delete(id);
     }
 
 
-    @PatchMapping(value = "/users/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PatchMapping(value = "{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void enable(@PathVariable int id, @RequestParam boolean enabled) {
         super.enable(id, enabled);
     }
 
 
-    @PutMapping(value = "/users/{id}",consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "{id}",consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void updatePass(@PathVariable int id,@RequestBody User user) {
+    public void updateUser(@PathVariable int id,@RequestBody User user) {
         super.update(user,id);
     }
 
-    @PostMapping(value = "/users", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.CREATED)
     public ResponseEntity<User> register(@RequestBody User user) {
         User created = super.create(user, Role.ROLE_ADMIN);

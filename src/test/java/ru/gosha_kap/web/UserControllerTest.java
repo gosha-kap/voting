@@ -63,6 +63,14 @@ class UserControllerTest extends AbstractTestController {
     }
 
     @Test
+    void updateANotherUser() throws Exception {
+        String Json = "{\"id\":\"2\",\"name\":\"Georgiy\"}";
+        perform(doPut().readyJsonBody(Json).basicAuth(USER1))
+                .andDo(print())
+                .andExpect(status().isUnprocessableEntity());
+    }
+
+    @Test
     void voteNotExistRestaurant() throws Exception {
         perform(doGetwithParam("vote","id","30").basicAuth(USER1))
                 .andDo(print())
