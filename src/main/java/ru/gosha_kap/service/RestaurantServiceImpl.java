@@ -1,12 +1,9 @@
 package ru.gosha_kap.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.gosha_kap.model.Restaurant;
 import ru.gosha_kap.repository.RestaurantRepository;
-import ru.gosha_kap.util.exception.NotFoundException;
 
 import java.util.List;
 
@@ -18,9 +15,11 @@ import static ru.gosha_kap.util.ValidationUtil.*;
 public class RestaurantServiceImpl implements  RestaurantService {
 
 
-    @Autowired
-    private RestaurantRepository repository;
+    private final RestaurantRepository repository;
 
+    public RestaurantServiceImpl(RestaurantRepository repository) {
+        this.repository = repository;
+    }
 
     @Override
     public List<Restaurant> getAll() {
@@ -52,8 +51,8 @@ public class RestaurantServiceImpl implements  RestaurantService {
     @Override
     @Transactional
     public void delete(int restaurantID) {
-        Restaurant restaurant = repository.getRestaurant(restaurantID);
-        repository.delete(restaurant);
+        checkNotFoundWithId(repository.delete(restaurantID) != 0, restaurantID);
+
     }
 
 

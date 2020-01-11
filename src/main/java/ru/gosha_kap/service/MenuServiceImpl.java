@@ -1,19 +1,23 @@
 package ru.gosha_kap.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
-import ru.gosha_kap.model.*;
+import ru.gosha_kap.model.Meal;
+import ru.gosha_kap.model.Menu;
+import ru.gosha_kap.model.Restaurant;
+import ru.gosha_kap.model.VoteEntity;
 import ru.gosha_kap.repository.MealRepository;
 import ru.gosha_kap.repository.MenuRepository;
 import ru.gosha_kap.repository.VoteJPARepository;
+import ru.gosha_kap.util.exception.NotFoundException;
 
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import static ru.gosha_kap.util.ValidationUtil.*;
 
@@ -24,17 +28,17 @@ public class MenuServiceImpl implements MenuService {
 
     private final int NOT_NULL_VOTECOUNT = 0;
 
-
-    @Autowired
     private MenuRepository menuRepository;
 
-    @Autowired
     private MealRepository mealRepository;
 
-    @Autowired
     private VoteJPARepository voteJPARepository;
 
-
+    public MenuServiceImpl(MenuRepository menuRepository, MealRepository mealRepository, VoteJPARepository voteJPARepository) {
+        this.menuRepository = menuRepository;
+        this.mealRepository = mealRepository;
+        this.voteJPARepository = voteJPARepository;
+    }
 
     @Override
     public List<Menu> getTodayMenus() {
@@ -80,11 +84,10 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     @Transactional
-    public void createMeal(Meal meal, Menu menu) {
-        Assert.notNull(meal, "meal must not be null");
+    public Meal createMeal(Meal meal, Menu menu) {
         checkNew(meal);
         meal.setMenu(menu);
-        mealRepository.save(meal);
+        return mealRepository.save(meal);
     }
 
     @Override
@@ -114,7 +117,7 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public void checkTodayMenu(int id) {
-        checkNotFound(menuRepository.findByRestaurantIdAndDateIsLike(id,LocalDate.now()),"No restaurant found or menu is not updated");
+        checkNotFound(menuRepository.findByRestaurantIdAndDateIsLike(id, LocalDate.now()), ":No restaurant found or menu is not updated");
     }
 
     @Override
@@ -122,13 +125,24 @@ public class MenuServiceImpl implements MenuService {
     public void updateVotes() {
         List<VoteEntity> votes = voteJPARepository.getTodayResult(LocalDate.now());
         Map<Integer,Integer> result = new HashMap<>();
-        votes.stream().forEach(x->{
-            result.merge(x.getRestaurant_id(),1,Integer::sum);
-        });
+        votes.forEach(x -> result.merge(x.getRestaurant_id(), 1, Integer::sum));
         for(Map.Entry<Integer,Integer> val: result.entrySet()){
            menuRepository.updateVote(val.getKey(),val.getValue(),LocalDate.now());
         }
 
+    }
+
+    @Override
+    public List<Meal> getAll() {
+        return mealRepository.findAll();
+    }
+
+    @Override
+    public Meal getMeal(int restaurantID, int mealID) {
+        Meal meal = mealRepository.getByID(mealID, restaurantID);
+        if (Objects.isNull(meal))
+            throw new NotFoundException("No meal is found with id = " + mealID + " for restaurantID = " + restaurantID);
+        return meal;
     }
 
 

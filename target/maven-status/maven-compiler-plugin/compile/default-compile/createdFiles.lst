@@ -7,9 +7,11 @@ ru/gosha_kap/util/exception/ErrorType.class
 ru/gosha_kap/model/Vote.class
 ru/gosha_kap/service/RestaurantService.class
 ru/gosha_kap/util/SecurityUtil.class
+ru/gosha_kap/to/RestrntTO.class
 ru/gosha_kap/to/RestrntVoteInfo.class
 ru/gosha_kap/service/UserService.class
 ru/gosha_kap/util/MenuUtil.class
+ru/gosha_kap/to/MealTO.class
 ru/gosha_kap/util/ValidationUtil.class
 ru/gosha_kap/service/MenuService.class
 ru/gosha_kap/AuthorizedUser.class

@@ -1,13 +1,8 @@
 package ru.gosha_kap.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.time.ZoneId;
 import java.util.Objects;
-import java.util.TimeZone;
 
 @Entity
 @Table(name = "restaurants")
@@ -41,14 +36,13 @@ public class Restaurant implements hasID {
     public Restaurant() {
     }
 
-
     public Integer getId() {
         return id;
     }
 
     @Override
     public void setId(Integer id) {
-
+        this.id = id;
     }
 
     public String getName() {
@@ -60,18 +54,19 @@ public class Restaurant implements hasID {
     }
 
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Restaurant that = (Restaurant) o;
-        return id == that.id;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(name, that.name) &&
+                Objects.equals(timezone, that.timezone);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(id, name, timezone);
     }
 
     public String getTimezone() {

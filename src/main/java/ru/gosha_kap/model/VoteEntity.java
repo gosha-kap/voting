@@ -1,8 +1,9 @@
 package ru.gosha_kap.model;
 
-import javax.persistence.*;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
 
 @Entity
 @Table(name = "voting_history")
@@ -11,7 +12,6 @@ public class VoteEntity {
 
     @EmbeddedId
     private Vote vote;
-
 
     @NotNull
     private int restaurant_id;

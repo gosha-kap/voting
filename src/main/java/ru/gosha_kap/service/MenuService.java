@@ -22,7 +22,7 @@ public interface MenuService {
 
     Menu createMenu(Restaurant restaurant);
 
-    void createMeal(Meal meal,Menu menu);
+    Meal createMeal(Meal meal, Menu menu);
 
     void update(Meal meal, int mealID, Menu menu);
 
@@ -33,4 +33,8 @@ public interface MenuService {
     void checkTodayMenu(int id);
 
     void updateVotes();
+
+    List<Meal> getAll();
+
+    Meal getMeal(int restaurantID, int mealID);
 }

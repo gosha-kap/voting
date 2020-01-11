@@ -17,7 +17,6 @@ import ru.gosha_kap.util.json.JsonUtil;
 
 import javax.annotation.PostConstruct;
 
-
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static ru.gosha_kap.web.AbstractTestController.RequestWrapper.wrap;
 
@@ -64,8 +63,6 @@ abstract public class AbstractTestController {
 
     public ResultActions perform(MockHttpServletRequestBuilder builder) throws Exception {
         return mockMvc.perform(builder);
-
-
     }
 
     protected RequestWrapper doGet(String urlTemplatePad, Object... uriVars) {
@@ -80,23 +77,22 @@ abstract public class AbstractTestController {
         return wrap(MockMvcRequestBuilders.get(url));
     }
 
-    protected RequestWrapper doGetwithoutRoot(String url) {
+  /*  protected RequestWrapper doGetwithoutRoot(String url) {
         return wrap(MockMvcRequestBuilders.get(url));
-    }
+    }*/
 
     protected RequestWrapper doGet(String pad) {
-        return wrap(MockMvcRequestBuilders.get(url + pad));
+        return wrap(MockMvcRequestBuilders.get(url + pad).contentType(MediaType.APPLICATION_JSON));
     }
-
 
     protected RequestWrapper doGet(int id) {
         return doGet("{id}", id);
     }
 
 
-    protected RequestWrapper doDelete() {
+  /*  protected RequestWrapper doDelete() {
         return wrap(MockMvcRequestBuilders.delete(url));
-    }
+    }*/
 
     protected RequestWrapper doDelete(int id) {
         return wrap(MockMvcRequestBuilders.delete(url + "/{id}", id).contentType(MediaType.APPLICATION_JSON));
