@@ -34,9 +34,6 @@ public class UserService implements UserDetailsService{
     @Autowired
     private  PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private RestaurantService restaurantService;
-
 
     public List<User> getAll() {
         return userRepository.findAll(SORT_BY_DATE);

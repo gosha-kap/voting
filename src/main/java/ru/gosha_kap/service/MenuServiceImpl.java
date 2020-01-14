@@ -13,6 +13,7 @@ import ru.gosha_kap.repository.MenuRepository;
 import ru.gosha_kap.repository.VoteJPARepository;
 import ru.gosha_kap.util.exception.NotFoundException;
 
+import javax.persistence.EntityManager;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
@@ -26,7 +27,7 @@ import static ru.gosha_kap.util.ValidationUtil.*;
 public class MenuServiceImpl implements MenuService {
 
 
-    private final int NOT_NULL_VOTECOUNT = 0;
+    private final int MIN_VOTECOUNT = 0;
 
     private MenuRepository menuRepository;
 
@@ -60,12 +61,12 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public List<Menu> getPopularsMenuForOne(int id) {
-        return menuRepository.findTop10ByRestaurantIdAndVotesIsGreaterThan(id, NOT_NULL_VOTECOUNT);
+        return menuRepository.findTop10ByRestaurantIdAndVotesIsGreaterThan(id, MIN_VOTECOUNT);
     }
 
     @Override
     public List<Menu> getPopularsMenus() {
-        return menuRepository.findTop10ByVotesGreaterThan(NOT_NULL_VOTECOUNT);
+        return menuRepository.findTop10ByVotesGreaterThan(MIN_VOTECOUNT);
     }
 
     @Override
@@ -140,9 +141,15 @@ public class MenuServiceImpl implements MenuService {
     @Override
     public Meal getMeal(int restaurantID, int mealID) {
         Meal meal = mealRepository.getByID(mealID, restaurantID);
-        if (Objects.isNull(meal))
-            throw new NotFoundException("No meal is found with id = " + mealID + " for restaurantID = " + restaurantID);
+        checkNotFound(meal,"No meal is found with id = " + mealID + " for restaurantID = " + restaurantID);
         return meal;
+    }
+
+    @Override
+    public Menu getMenu(int menuID) {
+        Menu menu = menuRepository.findById(menuID);
+        checkNotFound(menu,"No menu found with id = "+menuID);
+        return menu;
     }
 
 

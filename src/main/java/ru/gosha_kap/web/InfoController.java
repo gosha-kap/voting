@@ -20,17 +20,23 @@ public class InfoController {
     @Autowired
     private MenuService menuService;
 
-    @GetMapping("/today")
+    @GetMapping
     public List<RestrntFullInfo> getAllToday() {
         return MenuUtil.getAll(menuService.getTodayMenus());
     }
 
-    @GetMapping("/history/{restaurantId}")
-    public List<RestrntFullInfo> getHistoryForOne(@PathVariable int restaurantId) {
-        return MenuUtil.getAllForOne(menuService.getHistoryForOne(restaurantId));
+    @GetMapping("/menu/{menuID}")
+    public RestrntFullInfo getOne(@PathVariable int menuID){
+        return MenuUtil.createRestaurantInfo(menuService.getMenu(menuID));
     }
 
-    @GetMapping("/history")
+
+     @GetMapping("/votehist/{restaurantId}")
+    public List<RestrntVoteHistory> getHistoryForOne(@PathVariable int restaurantId) {
+        return MenuUtil.getVoteHistory(menuService.getHistoryForOne(restaurantId));
+    }
+
+    @GetMapping("/votehist")
     public List<RestrntVoteHistory> getHistoryVoting() {
         return MenuUtil.getVoteHistory(menuService.getHistoryVoting());
     }

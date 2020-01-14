@@ -1,5 +1,7 @@
 package ru.gosha_kap.web.user;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -11,6 +13,7 @@ import ru.gosha_kap.model.Role;
 import ru.gosha_kap.model.User;
 import ru.gosha_kap.model.VoteEntity;
 import ru.gosha_kap.service.MenuService;
+import ru.gosha_kap.service.UserService;
 import ru.gosha_kap.service.VoteService;
 
 
@@ -21,9 +24,10 @@ import static ru.gosha_kap.util.SecurityUtil.authUserId;
 
 @RestController
 @RequestMapping(value ="/rest/profile",produces = MediaType.APPLICATION_JSON_VALUE)
-public class UserController extends AbstractUserController {
+public class UserController  {
 
 
+    protected final Logger log = LoggerFactory.getLogger(getClass());
 
     @Autowired
     private MenuService menuService;
@@ -31,26 +35,37 @@ public class UserController extends AbstractUserController {
     @Autowired
     private VoteService voteService;
 
+    @Autowired
+    private UserService userService;
+
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public User get() {
-        return super.get(authUserId());
-    }
+        int id = authUserId();
+        log.info("get {}", id);
+        return userService.get(id);
+     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@RequestBody User user) {
-        super.update(user, authUserId());
+        int id = authUserId();
+        log.info("update {} with id={}", user, id);
+        userService.update(user,id);
+
     }
 
     @PostMapping(value = "/register", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.CREATED)
     public ResponseEntity<User> register(@RequestBody User user) {
-        User created = super.create(user, Role.ROLE_USER);
+        user.addRole(Role.ROLE_USER);
+        log.info("create from to {}", user);
+        User created = userService.create(user);
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/rest/profile/{id}")
                 .buildAndExpand(created.getId()).toUri();
         return ResponseEntity.created(uriOfNewResource).body(created);
+
     }
 
     @GetMapping(value="/vote",consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -64,7 +79,7 @@ public class UserController extends AbstractUserController {
 
     }
 
-    @GetMapping(value="/history",consumes = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value="/history")
     public List<VoteEntity> getHistoryForUser(){
         return voteService.getHistoryForUser(authUserId());
     }

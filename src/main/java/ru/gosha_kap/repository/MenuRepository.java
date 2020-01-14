@@ -34,6 +34,10 @@ public interface MenuRepository extends JpaRepository<Menu,Integer> {
     @Query("select m from Menu m where m.restaurant.id=?2 and m.date=?1")
     Menu getTodayInfo(LocalDate date, int id);
 
+    @EntityGraph(attributePaths = {"restaurant", "meals"})
+    @Query("select m from Menu m where m.id=?1")
+    Menu findById(int id);
+
     @Modifying
     @Query("delete from Menu m where m.restaurant.id=?1 and m.date=?2")
     void deleteTodayMenu(int id,LocalDate date);

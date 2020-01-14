@@ -23,7 +23,6 @@ import java.util.List;
 public class VoteService {
 
 
-
     @Autowired
     private VoteJPARepository voteJPARepository;
 

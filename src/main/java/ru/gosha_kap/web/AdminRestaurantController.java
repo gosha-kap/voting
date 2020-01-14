@@ -70,7 +70,7 @@ public class AdminRestaurantController {
         restaurantService.update(restaurant,restaurantID);
     }
 
-    @DeleteMapping(value = "{restaurantID}",consumes = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping("{restaurantID}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteRestaurant(@PathVariable int restaurantID){
         log.info("delete  restaurant with id="+restaurantID);
@@ -83,9 +83,7 @@ public class AdminRestaurantController {
         return MenuUtil.createRestaurantInfo(getTodayMenu(restaurantID));
     }
 
-
-    //////////////////////////////
-    @GetMapping(value = {"{restaurantID}/meals/{mealID}"}, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = {"{restaurantID}/meals/{mealID}"})
     public MealTO getMeal(@PathVariable int restaurantID, @PathVariable int mealID) {
         log.info("get  meal info with mealID=" + mealID + " and restaurandID = " + restaurantID);
         return MenuUtil.createMealTO(menuService.getMeal(restaurantID, mealID));
@@ -100,14 +98,8 @@ public class AdminRestaurantController {
 
     }
 
-    ///////////////////////////////
 
-
-
-
-
-
-    @PutMapping(value = "{restaurantID}/meals/{mealID}",consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "{restaurantID}/meals/{mealID}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void updateMeal(@PathVariable int restaurantID ,
                            @PathVariable int mealID,
@@ -117,7 +109,7 @@ public class AdminRestaurantController {
        }
 
 
-    @DeleteMapping(value = "{restaurantID}/meals/{mealID}",consumes = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = "{restaurantID}/meals/{mealID}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void deleteMeal(@PathVariable int restaurantID ,
                            @PathVariable int mealID){
@@ -135,7 +127,7 @@ public class AdminRestaurantController {
     private Menu getTodayMenu(@PathVariable int restaurantID) {
         Restaurant restaurant = restaurantService.get(restaurantID);
         return Objects.isNull(menuService.getTodayMenu(restaurantID)) ? menuService.createMenu(restaurant) :
-                        menuService.getTodayMenu(restaurantID);
+        menuService.getTodayMenu(restaurantID);
    }
 
 

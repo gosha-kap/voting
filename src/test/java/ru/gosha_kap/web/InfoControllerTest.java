@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.CacheManager;
 import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.transaction.annotation.Transactional;
 import ru.gosha_kap.to.RestrntFullInfo;
 import ru.gosha_kap.to.RestrntVoteHistory;
@@ -14,10 +15,12 @@ import ru.gosha_kap.util.MenuUtil;
 
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static ru.gosha_kap.TestData.*;
+import static ru.gosha_kap.TestUtil.readFromJson;
 
 @Transactional
 class InfoControllerTest extends AbstractTestController {
@@ -44,7 +47,7 @@ class InfoControllerTest extends AbstractTestController {
     void getAllToday() throws Exception {
 
 
-            perform(get("/rest/info/today"))
+            perform(get("/rest/info"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
@@ -54,16 +57,16 @@ class InfoControllerTest extends AbstractTestController {
 
     @Test
     void getHistoryForOne() throws Exception {
-        perform(get("/rest/info/history/3"))
+        perform(get("/rest/info/voteHist/3"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(contentJson(MenuUtil.getAllForOne(List.of(MENU_15, MENU_11, MENU_7, MENU_3)), RestrntFullInfo.class));
+                .andExpect(contentJson(MenuUtil.getVoteHistory(List.of(MENU_15, MENU_11, MENU_7, MENU_3)), RestrntVoteHistory.class));
     }
 
     @Test
     void getHistoryVoting() throws Exception {
-        perform(get("/rest/info/history"))
+        perform(get("/rest/info/voteHist"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
@@ -85,5 +88,16 @@ class InfoControllerTest extends AbstractTestController {
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(contentJson(MenuUtil.getAll(
                         List.of(MENU_2, MENU_6, MENU_10)), RestrntFullInfo.class));
+    }
+
+    @Test
+    void getOne() throws  Exception{
+       ResultActions actions = perform(get("/rest/info/menu/10"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON));
+       RestrntFullInfo menuInfo = readFromJson(actions,RestrntFullInfo.class);
+       assertEquals(menuInfo.getMenu_id(),10);
+
     }
 }

@@ -37,4 +37,6 @@ public interface MenuService {
     List<Meal> getAll();
 
     Meal getMeal(int restaurantID, int mealID);
+
+    Menu getMenu(int menu);
 }

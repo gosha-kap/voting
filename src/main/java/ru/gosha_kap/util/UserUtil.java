@@ -8,6 +8,8 @@ import static org.springframework.util.StringUtils.hasText;
 
 public class UserUtil {
 
+    private UserUtil() {
+    }
 
     public static User prepareToUpDate(User original, User user, PasswordEncoder passwordEncoder) {
 
