@@ -7,8 +7,9 @@ ___
 Show todays restaurants menus
 ----
   Returns a list of menu data about all updated  restaurants menus.
-  Menu data is represented by MenuTO object, which including short restaurant info and meals items
-  Example:
+  Menu data is represented by List of MenuTO objects, which including short restaurant info and meals items. </br>
+  Example MealTO Object:
+```json
    {
         "restaurant_id":2,
         "restaurant_name":"Mishan",
@@ -24,9 +25,9 @@ Show todays restaurants menus
                 "price":1002    },
             {   "id":30,
                 "description":"Индейка",
-                "price":702 }
-                ]}
+                "price":702 }                ]}
 
+```
   
 
 * **URL** :  /rest/info
@@ -41,7 +42,7 @@ Show todays restaurants menus
   * **Code:** 200 <br />
   
 * **Example Request:** curl --location --request GET 'http://localhost:8080/voting/rest/info'
-
+_________
 
  Show top10 restaurants menus from all history
 ----
