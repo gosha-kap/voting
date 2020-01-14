@@ -7,25 +7,25 @@ public class RestrntVoteInfo {
 
     private int voted;
     private String restaurantName;
-    private int restaurntID;
-    private int menuID;
+    private int restaurnt_id;
+    private int menu_id;
 
-    public RestrntVoteInfo(int id, String restaurantName, int voted, int menuID) {
-        this.restaurntID = id;
+    public RestrntVoteInfo(int id, String restaurantName, int voted, int menu_id) {
+        this.restaurnt_id = id;
         this.restaurantName = restaurantName;
         this.voted = voted;
-        this.menuID = menuID;
+        this.menu_id = menu_id;
     }
 
     public RestrntVoteInfo() {
     }
 
-    public int getRestaurntID() {
-        return restaurntID;
+    public int getRestaurnt_id() {
+        return restaurnt_id;
     }
 
-    public void setRestaurntID(int restaurntID) {
-        this.restaurntID = restaurntID;
+    public void setRestaurnt_id(int restaurnt_id) {
+        this.restaurnt_id = restaurnt_id;
     }
 
     public String getRestaurantName() {
@@ -44,12 +44,12 @@ public class RestrntVoteInfo {
         this.voted = voted;
     }
 
-    public int getMenuID() {
-        return menuID;
+    public int getMenu_id() {
+        return menu_id;
     }
 
-    public void setMenuID(int menuID) {
-        this.menuID = menuID;
+    public void setMenu_id(int menu_id) {
+        this.menu_id = menu_id;
     }
 
 
@@ -60,14 +60,14 @@ public class RestrntVoteInfo {
         if (o == null || getClass() != o.getClass()) return false;
         RestrntVoteInfo that = (RestrntVoteInfo) o;
         return voted == that.voted &&
-                restaurntID == that.restaurntID &&
-                menuID == that.menuID &&
+                restaurnt_id == that.restaurnt_id &&
+                menu_id == that.menu_id &&
                 Objects.equals(restaurantName, that.restaurantName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(voted, restaurantName, restaurntID, menuID);
+        return Objects.hash(voted, restaurantName, restaurnt_id, menu_id);
     }
 
 

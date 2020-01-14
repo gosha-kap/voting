@@ -57,7 +57,7 @@ class InfoControllerTest extends AbstractTestController {
 
     @Test
     void getHistoryForOne() throws Exception {
-        perform(get("/rest/info/voteHist/3"))
+        perform(get("/rest/info/votehist/3"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
@@ -66,7 +66,7 @@ class InfoControllerTest extends AbstractTestController {
 
     @Test
     void getHistoryVoting() throws Exception {
-        perform(get("/rest/info/voteHist"))
+        perform(get("/rest/info/votehist"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
