@@ -6,7 +6,7 @@ ___
 
 Show todays restaurants menus
 ----
-  <\t>Returns a list of menu data about all updated  restaurants menus.
+  </t>Returns a list of menu data about all updated  restaurants menus.
   Menu data is represented by List of __MenuTO__ objects, which including short restaurant info and meals items. </br>
   Example __MealTO__ Object:
 ```json
@@ -45,7 +45,7 @@ _________
 
  Show top10 restaurants menus from all history
 ----
-  <\t>Returns a list of 10 tops MenuTO objects with max __voted__ value.
+  </t>Returns a list of 10 tops __MenuTO__ objects with max __voted__ value.
 * **URL** :  /rest/info/top10
 * **Method:**  `GET`
   
@@ -61,7 +61,7 @@ _________
     
  Show top10  menus from one restaurant
  ----
- <\t>Returns a list of 10 tops MenuTO objects restaurant with __restaurant_id__ .
+ </t>Returns a list of 10 tops __MenuTO__ objects restaurant with __restaurant_id__ .
 
  * **URL** :  /rest/info/top10/{restaurant_id}
  * **Method:**  `GET`
@@ -78,7 +78,7 @@ _________
 
 Show restaurant menu 
 -----
-<\t>Returns a  MenuTO objects  with __menu_id__ . 
+</t>Returns a  _MenuTO_ objects  with __menu_id__ . 
         
  * **URL** :  /rest/info/menu/{menu_id}
  * **Method:**  `GET`
@@ -95,7 +95,7 @@ Show restaurant menu
 
 Show voting history
 ---
-<\t>Returns a list of  data about all voted  restaurants  menu with  __voted__ value more than 0.
+</t>Returns a list of  data about all voted  restaurants  menu with  __voted__ value more than 0.
   Data is represented by  __RestrntVoteHistory__ objects, which including date and list of __RestrntVoteInfo__ object. </br>
   Example __RestrntVoteInfo__  Object:
   ```json
@@ -124,7 +124,7 @@ Show voting history
 
 Show restaurant voting history
 ------
-<\t>Returns a list of  data about vote history for restaurant and it menu with  __restaurant_id__ value.
+</t>Returns a list of  data about vote history for restaurant and it menu with  __restaurant_id__ value.
  
  * **URL** :  /rest/info/votehist/{restaurant_id}
  * **Method:**  `GET`
