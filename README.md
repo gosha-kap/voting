@@ -1,12 +1,33 @@
 **Restaurant Vote system**
 ----
-This is education example of my REST API from the task below
+This is education example of my REST API from the task below </br>
 https://github.com/JavaWebinar/topjava/blob/doc/doc/graduation.md
 ___
 
 Show todays restaurants menus
 ----
-  Returns a list of json data about all updated  restaurants menus.
+  Returns a list of menu data about all updated  restaurants menus.
+  Menu data is represented by MenuTO object, which including short restaurant info and meals items
+  Example:
+   {
+        "restaurant_id":2,
+        "restaurant_name":"Mishan",
+        "menuDate":"2018-08-29",
+        "voted":1,
+        "menu_id":10,
+        "menu":[
+            {   "id":28,
+                "description":"Тунец"
+                ,"price":502    },
+            {   "id":29,
+                "description":"Мармелад",
+                "price":1002    },
+            {   "id":30,
+                "description":"Индейка",
+                "price":702 }
+                ]}
+
+  
 
 * **URL** :  /rest/info
 * **Method:**  `GET`
@@ -72,8 +93,8 @@ Get detail Information about restaurant menu with {menuID}
 
 *  **Example Request:** curl --location --request GET 'http://localhost:8080/voting/rest/info/menu/10'  
 
-##Show voting history
-
+Show voting history
+---
 Get all history information   
 
  * **URL** :  /rest/info/votehist
