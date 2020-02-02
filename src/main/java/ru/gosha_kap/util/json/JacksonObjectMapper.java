@@ -21,9 +21,6 @@ public class JacksonObjectMapper extends ObjectMapper {
           setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
           setSerializationInclusion(JsonInclude.Include.NON_NULL);
 
-//      https://stackoverflow.com/questions/22875642/jackson-set-default-view
-       // setConfig(getSerializationConfig().withView(View.JsonREST.class));
-
 
     }
 

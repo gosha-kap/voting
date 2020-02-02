@@ -41,9 +41,7 @@ public class VoteService {
         String restaurantTZ = restaurantRepository.getTZ(restaurantId);
         ZonedDateTime restaurantTime = ZonedDateTime.now(ZoneId.of(restaurantTZ));
         ZonedDateTime voteLimitTime = ZonedDateTime.of(LocalDate.now(),LocalTime.of(voteLimitHour,voteLimitMinutes),ZoneId.of(restaurantTZ));
-
-        if(restaurantTime.isAfter(voteLimitTime)) return false;
-        return true;
+        return restaurantTime.isAfter(voteLimitTime);
     }
 
     @Transactional

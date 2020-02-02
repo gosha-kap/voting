@@ -3,12 +3,9 @@ package ru.gosha_kap;
 
 import org.springframework.test.web.servlet.ResultMatcher;
 import ru.gosha_kap.model.*;
-import ru.gosha_kap.to.RestrntFullInfo;
-import ru.gosha_kap.to.RestrntVoteHistory;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;

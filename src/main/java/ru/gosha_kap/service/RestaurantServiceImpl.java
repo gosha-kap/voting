@@ -42,10 +42,10 @@ public class RestaurantServiceImpl implements  RestaurantService {
 
     @Override
     @Transactional
-    public void update(Restaurant restaurant, int restaurantID) {
+    public Restaurant update(Restaurant restaurant, int restaurantID) {
         assureIdConsistent(restaurant,restaurantID);
         Restaurant original = repository.getRestaurant(restaurantID);
-        repository.save(prepareToUpdate(original,restaurant));
+        return repository.save(prepareToUpdate(original, restaurant));
     }
 
     @Override

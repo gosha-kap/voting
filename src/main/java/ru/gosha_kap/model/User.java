@@ -11,7 +11,8 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.*;
+import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
+import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.NONE;
 
 @Entity
 @Table(name = "users")
@@ -36,7 +37,7 @@ public class User implements hasID {
 
     @Column(name="password")
     @NotBlank
-    @Size(min = 5, max = 100)
+    @Size(min = 2, max = 100)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String pass;
 

@@ -17,10 +17,9 @@ import ru.gosha_kap.util.exception.ErrorType;
 import ru.gosha_kap.util.exception.IllegalRequestDataException;
 import ru.gosha_kap.util.exception.NotFoundException;
 
-
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.ConstraintViolationException;
 
-import static ru.gosha_kap.util.exception.ErrorType.DATA_NOT_FOUND;
 import static ru.gosha_kap.util.exception.ErrorType.*;
 
 @RestControllerAdvice
@@ -45,6 +44,13 @@ public class ExceptionInfoHandler {
     public ErrorInfo illegalRequestDataError(HttpServletRequest req, Exception e) {
         return logAndGetErrorInfo(req, e, false, VALIDATION_ERROR);
     }
+
+    @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ErrorInfo validationError(HttpServletRequest req, Exception e) {
+        return logAndGetErrorInfo(req, e, false, VALIDATION_ERROR);
+    }
+
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(Exception.class)

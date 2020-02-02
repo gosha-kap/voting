@@ -13,7 +13,7 @@ public interface RestaurantService {
 
     Restaurant create(Restaurant restaurant);
 
-    void update(Restaurant restaurant, int restaurantID);
+    Restaurant update(Restaurant restaurant, int restaurantID);
 
     void delete(int restaurantID);
 }

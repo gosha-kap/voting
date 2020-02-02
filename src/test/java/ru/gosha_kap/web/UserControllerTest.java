@@ -7,11 +7,12 @@ import org.springframework.test.web.servlet.ResultActions;
 import ru.gosha_kap.model.User;
 import ru.gosha_kap.service.UserService;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static ru.gosha_kap.TestData.*;
+import static ru.gosha_kap.TestData.USER1;
+import static ru.gosha_kap.TestData.USER_MATCHERS;
 import static ru.gosha_kap.TestUtil.readFromJson;
 
 class UserControllerTest extends AbstractTestController {
@@ -58,7 +59,7 @@ class UserControllerTest extends AbstractTestController {
         String Json = "{\"name\":\"Georgiy\"}";
         perform(doPut().readyJsonBody(Json).basicAuth(USER1))
                 .andDo(print())
-                .andExpect(status().isNoContent());
+                .andExpect(status().isOk());
         assertEquals(userService.get(1).getName(),"Georgiy");
     }
 

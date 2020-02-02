@@ -11,14 +11,11 @@ import ru.gosha_kap.model.VoteEntity;
 import ru.gosha_kap.repository.MealRepository;
 import ru.gosha_kap.repository.MenuRepository;
 import ru.gosha_kap.repository.VoteJPARepository;
-import ru.gosha_kap.util.exception.NotFoundException;
 
-import javax.persistence.EntityManager;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 import static ru.gosha_kap.util.ValidationUtil.*;
 
@@ -93,12 +90,12 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     @Transactional
-    public void update(Meal meal, int mealID, Menu menu) {
+    public Meal update(Meal meal, int mealID, Menu menu) {
         Assert.notNull(meal, "meal must not be null");
         assureIdConsistent(meal,mealID);
         assureIdIsIncluded(menu,meal);
         meal.setMenu(menu);
-        mealRepository.save(meal);
+        return mealRepository.save(meal);
     }
 
     @Override

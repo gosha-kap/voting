@@ -2,10 +2,9 @@ package ru.gosha_kap.web;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.Assert;
 import ru.gosha_kap.service.UserService;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static ru.gosha_kap.TestData.ADMIN;
 import static ru.gosha_kap.TestData.USER1;
@@ -40,7 +39,7 @@ class AdminUserControllerTest extends AbstractTestController {
     @Test
     void deleteUser() throws Exception {
         perform(doDelete(3).basicAuth(ADMIN)).
-                andExpect(status().isNoContent());
+                andExpect(status().isOk());
         assertEquals(userService.getAll().size(),4);
     }
 
@@ -56,7 +55,7 @@ class AdminUserControllerTest extends AbstractTestController {
     void updateUser() throws Exception{
         String Json = "{\"id\":\"3\",\"name\":\"Georgiy\"}";
         perform(doPut(3).basicAuth(ADMIN).readyJsonBody(Json)).
-                andExpect(status().isNoContent());
+                andExpect(status().isOk());
         assertEquals(userService.get(3).getName(),"Georgiy");
     }
  }

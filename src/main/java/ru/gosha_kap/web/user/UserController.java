@@ -3,7 +3,6 @@ package ru.gosha_kap.web.user;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -11,11 +10,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.gosha_kap.model.Role;
 import ru.gosha_kap.model.User;
-import ru.gosha_kap.model.VoteEntity;
 import ru.gosha_kap.service.MenuService;
 import ru.gosha_kap.service.UserService;
 import ru.gosha_kap.service.VoteService;
-
+import ru.gosha_kap.to.VoteTO;
+import ru.gosha_kap.util.UserUtil;
 
 import java.net.URI;
 import java.util.List;
@@ -47,11 +46,11 @@ public class UserController  {
      }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@RequestBody User user) {
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<User> update(@RequestBody User user) {
         int id = authUserId();
         log.info("update {} with id={}", user, id);
-        userService.update(user,id);
+        return new ResponseEntity<User>(userService.update(user, id), HttpStatus.OK);
 
     }
 
@@ -80,8 +79,8 @@ public class UserController  {
     }
 
     @GetMapping(value="/history")
-    public List<VoteEntity> getHistoryForUser(){
-        return voteService.getHistoryForUser(authUserId());
+    public List<VoteTO> getHistoryForUser() {
+        return UserUtil.toVoteTO(voteService.getHistoryForUser(authUserId()));
     }
 
 

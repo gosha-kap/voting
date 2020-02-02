@@ -69,7 +69,7 @@ class AdminRestaurantControllerTest extends AbstractTestController {
     void updateRestaurant() throws Exception {
         String Json = "{\"name\":\"TestName\",\"id\":\"1\"}";
         perform(doPut(1).basicAuth(ADMIN).readyJsonBody(Json)).andDo(print()).
-                andExpect(status().isNoContent());
+                andExpect(status().isOk());
         assertEquals(restaurantService.get(1).getName(), "TestName");
     }
 
@@ -82,7 +82,7 @@ class AdminRestaurantControllerTest extends AbstractTestController {
     @Test
     void deleteRestaurant() throws Exception {
         perform((doDelete(3)).basicAuth(ADMIN)).andDo(print()).
-                andExpect(status().isNoContent());
+                andExpect(status().isOk());
         assertEquals(restaurantService.getAll().size(), 3);
     }
 

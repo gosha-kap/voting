@@ -24,7 +24,7 @@ public interface MenuService {
 
     Meal createMeal(Meal meal, Menu menu);
 
-    void update(Meal meal, int mealID, Menu menu);
+    Meal update(Meal meal, int mealID, Menu menu);
 
     void delete(int mealID, Menu todayMenu);
 

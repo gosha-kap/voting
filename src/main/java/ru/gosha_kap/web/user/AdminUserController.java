@@ -38,7 +38,7 @@ public class AdminUserController  {
     }
 
     @DeleteMapping("{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ResponseStatus(HttpStatus.OK)
     public void delete(@PathVariable int id) {
         log.info("delete {}", id);
         userService.delete(id);
@@ -54,10 +54,9 @@ public class AdminUserController  {
 
 
     @PutMapping(value = "{id}",consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void updateUser(@PathVariable int id,@RequestBody User user) {
+    public ResponseEntity<User> updateUser(@PathVariable int id, @RequestBody User user) {
         log.info("update {} with id={}", user, id);
-        userService.update(user,id);
+        return new ResponseEntity<User>(userService.update(user, id), HttpStatus.OK);
         }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)

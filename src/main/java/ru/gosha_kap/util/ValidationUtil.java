@@ -4,7 +4,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import ru.gosha_kap.model.Meal;
 import ru.gosha_kap.model.Menu;
-import ru.gosha_kap.model.User;
 import ru.gosha_kap.model.hasID;
 import ru.gosha_kap.util.exception.IllegalRequestDataException;
 import ru.gosha_kap.util.exception.NotFoundException;
@@ -60,7 +59,7 @@ public class ValidationUtil {
 
     public static void assureIdIsIncluded(Menu menu, Meal meal){
         if(Objects.isNull(menu.getMeals().stream().filter(x->x.getId().equals(meal.getId())).findFirst().orElse(null)))
-            throw new IllegalRequestDataException("Not native meal for this menu");;
+            throw new IllegalRequestDataException("Not native meal for this menu");
     }
 
 
@@ -74,6 +73,7 @@ public class ValidationUtil {
 
 
     public static Throwable getRootCause(Throwable t) {
+
         Throwable result = t;
         Throwable cause;
 

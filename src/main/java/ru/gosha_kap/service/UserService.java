@@ -70,9 +70,10 @@ public class UserService implements UserDetailsService{
     }
 
     @Transactional
-    public void update(User user,int id) {
+    public User update(User user, int id) {
         assureIdConsistent(user, id);
-        userRepository.save(UserUtil.prepareToUpDate(get(id),user,passwordEncoder));
+        return userRepository.save(UserUtil.prepareToUpDate(get(id), user, passwordEncoder));
+
     }
 
     @Transactional
