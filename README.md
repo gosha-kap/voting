@@ -25,11 +25,11 @@ It should contain the code and README.md with API documentation and curl command
 
 ___
 
-#####The section below has public access  without  any credentions. It starts with $ROOT_PATH/rest/info .If parameter is not exist it return empty data.
+##### The section below has public access  without  any credentions. It starts with $ROOT_PATH/rest/info .If parameter is not exist it return empty data.
 ___
 
 
-####Show todays restaurants menus
+#### Show todays restaurants menus
 
   Returns a list of menu data about all updated  restaurants menus.
   Menu data is represented by list of  objects, which including short restaurant info and meals items. </br>
@@ -62,7 +62,7 @@ ___
   
  _________
 
-####Show top10 restaurants menus from all history
+#### Show top10 restaurants menus from all history
 
 
  Returns a list of 10 tops menus  with max `voted` value.
@@ -72,7 +72,8 @@ ___
 * **Success Response:** `200 OK` 
   
  --------   
- ####Show top10  menus from one restaurant
+ 
+ #### Show top10  menus from one restaurant
  
  
  Returns a list of 10 tops menus restaurants with `restaurant_id`
@@ -84,7 +85,7 @@ ___
  *   **Success Response:** ` 200 OK` 
   --------------------------
   
-####Show restaurant menu
+#### Show restaurant menu
 
 
 Returns a  menu   with  `menu_id` . 
@@ -96,7 +97,7 @@ Returns a  menu   with  `menu_id` .
  *  **Success Response:** `200 OK` 
  --------------------------------------
 
-####Show voting history
+#### Show voting history
 
   Returns a list of  data about all   menus restaurants,  where  `voted` value more than zero.
   Data is represented by list of objects. One object is including date and `voteResult`  - a list of short info restaurant items</br>
@@ -118,7 +119,7 @@ Returns a  menu   with  `menu_id` .
  * **Success Response:** `200 OK` <br />
   -------------------
 
-####Show restaurant voting history
+#### Show restaurant voting history
 
 
 Returns a list of  data about vote history for restaurant and it menu with  `restaurant_id` value.
@@ -132,10 +133,10 @@ Returns a list of  data about vote history for restaurant and it menu with  `res
  
 ___
   
-#####The section below is for register user and  all features that is has. To authorise request use basic authorization. It starts with $ROOT_PATH/rest/profile
+##### The section below is for register user and  all features that is has. To authorise request use basic authorization. It starts with $ROOT_PATH/rest/profile
 ___
 
-####Register new User
+#### Register new User
 
 Register user by sending form data. Login value is unique, other fields have length from 2 to 100. 
 
@@ -176,7 +177,7 @@ Example:
     }
 ```
 --------------
- ####Show user profile
+ #### Show user profile
  
  
  * **URL** :  `/rest/profile`
@@ -185,7 +186,7 @@ Example:
  * **Success Response:** ` 200 OK` <br />
  * **Error Response:** ` 401 UNAUTHORIZED `
  ___   
- ####Update user 
+ #### Update user 
    
   
   * **URL** :  `/rest/profile`
@@ -205,7 +206,7 @@ Example:
       * **Code:**  422 `UNPROCESSABLE ENTITY`
  
  ___   
- ####Vote for restaurant
+ #### Vote for restaurant
     
   Making vote for restaurant with `restaurant_id` parameter. If time is acceptable for voting you get `You has voted  for restaurant with id = {id}` or `Sorry. It's too late to vote`.   
    * **URL** :  /rest/profile/vote
@@ -220,7 +221,7 @@ Example:
         * **Code:**  422 `UNPROCESSABLE ENTITY`
   
   ___   
-  ####Get user voting history
+  #### Get user voting history
   
   
    * **URL** :  `/rest/profile/history`
@@ -244,19 +245,19 @@ Example:
   * **Error Response:** ` 401 UNAUTHORIZED`  
 _____
        
-#####The section below is for admin and  all features that is has. To authorise request usebasic authorization. It starts with $ROOT_PATH/rest/admin . Admin can manage its profile like a simple  user  and orthers users profiles. Admin manage resturants info.
+##### The section below is for admin and  all features that is has. To authorise request usebasic authorization. It starts with $ROOT_PATH/rest/admin . Admin can manage its profile like a simple  user  and orthers users profiles. Admin manage resturants info.
 ___              
 
 If use  simple user credentials,  server will back 403 HTTP Error.
 ______
 
-####Show users
+#### Show users
    * **URL** :  `/rest/admin/users`
    * **Method:**  `GET`
    * **Example Request:** `curl -L -X GET  'http://localhost:8080/voting/rest/admin/users' -u admin:111`
    * **Success Response:** ` 200 OK` <br />
 ______________________
- ####Show one user profile
+#### Show one user profile
         
 * **URL** :  `/rest/admin/users/{userID}`
 * **Method:**  `GET`
@@ -265,7 +266,7 @@ ______________________
 * **Success Response:** `200 OK` <br />
 * **Error Response:** `422 UNPROCESSABLE ENTITY`
  __________
- ####Create admin user
+#### Create admin user
  
 Register new  admin  profile. Login value is unique, other fields have length from 2 to 100. Example:
 
@@ -286,7 +287,7 @@ Register new  admin  profile. Login value is unique, other fields have length fr
 
 ----
    
-####Disable/enable user profile
+#### Disable/enable user profile
    
    Change field `enabled` in user profile. Disabled user can't authorise.
    
@@ -294,13 +295,12 @@ Register new  admin  profile. Login value is unique, other fields have length fr
    * **Method:**  `PATCH`
    * **URL Params**: `userID`
    * **Get Params**: `enabled`
-   * **Example Request:** 
-    `curl -s -X PATCH  'http://localhost:8080/voting/rest/admin/users/3?enabled=false'  -u admin:111 `    
+   * **Example Request:**  `curl -s -X PATCH  'http://localhost:8080/voting/rest/admin/users/3?enabled=false'  -u admin:111 `    
    * **Success Response:** `200 OK` <br /> 
    * **Error Response:**  `422 UNPROCESSABLE ENTITY` 
    
   ------
-  ####Update  user
+ #### Update  user
   
     
    * **URL** :  `/rest/admin/user/{userID}`
@@ -318,7 +318,7 @@ Register new  admin  profile. Login value is unique, other fields have length fr
    * **Success Response:** `200 OK` <br />
    * **Error Response:** `  422 UNPROCESSABLE ENTITY`
     -----
- ####Delete user
+ #### Delete user
   
 
   * **URL** :  `/rest/admin/user/{userID}`
@@ -329,7 +329,7 @@ Register new  admin  profile. Login value is unique, other fields have length fr
   * **Error Response:** `422 UNPROCESSABLE ENTITY`
     
    ---------------------
-   ####Show restaurants
+   #### Show restaurants
    
    
    Show list of restaurants with short information about them timezones and if restaurants have updated menu.
@@ -351,7 +351,7 @@ Register new  admin  profile. Login value is unique, other fields have length fr
    * **Success Response:** ` 200 OK` <br />
  
    ------------------
-   ####Show one restaurant
+   #### Show one restaurant
     
  
  Display the same information as above but only for one restaurant
@@ -372,7 +372,7 @@ Register new  admin  profile. Login value is unique, other fields have length fr
    ```
   _____________________
             
- ####Create restaurant
+ #### Create restaurant
   
  * **URL** :  `/rest/admin/restaurants`
  * **Method:**  `POST`
@@ -397,7 +397,7 @@ Register new  admin  profile. Login value is unique, other fields have length fr
    ```
  -----------------
  
- ####Update restaurant information
+ #### Update restaurant information
   
   * **URL** :  `/rest/admin/restaurants/{id}`
   * **Method:**  `PUT`
@@ -412,8 +412,9 @@ Register new  admin  profile. Login value is unique, other fields have length fr
  ```
    * **Example Request:** `curl -L -X PUT -d '{"name": "newname", "timezone":"GMT+10:00"}'  -H 'Content-Type:application/json;charset=UTF-8' 'http://localhost:8080/voting/rest/admin/restaurants/3' -u admin:111`
    * **Success Response:** ` 200 OK` <br />
-    ___________________________________________
-   ####Delete restaurant
+   ___________________________________________
+   
+#### Delete restaurant
    
    * **URL** :  `/rest/admin/restaurants/{id}`
    * **Method:**  `DELETE`
@@ -422,7 +423,7 @@ Register new  admin  profile. Login value is unique, other fields have length fr
    * **Success Response:** `200 OK` <br /> 
  -----------------------------------------
  
-####Show today's  menu for single  restaurant
+#### Show today's  menu for single  restaurant
  
  
  Get detail info about menu and meals for single restaurant 
@@ -432,7 +433,7 @@ Register new  admin  profile. Login value is unique, other fields have length fr
    * **Example Request:** `curl -L -X GET 'http://localhost:8080/voting/rest/admin/restaurants/2/meals' -u admin:111`
    * **Success Response:** ` 200 OK` <br /> 
   ---------------------------
- ####Add meal to menu
+ #### Add meal to menu
  
   Create  meal item and menu for restaurant if not exist. 
    * **URL** :  `/rest/admin/restaurants/{restaurant_id}/meals`
@@ -460,7 +461,7 @@ Register new  admin  profile. Login value is unique, other fields have length fr
   ```
  ----------------------------------
  
- **Update meal**
+ #### Update meal
  
  
  Update meal by its `id` by `restaurant_id`
@@ -479,7 +480,7 @@ Register new  admin  profile. Login value is unique, other fields have length fr
    * **Success Response :** ` 201 CREATED` <br />
   -------------------
   
-  ####Delete meal
+  #### Delete meal
    
   Delete meal by its `id` and by `restaurant_id`
   
@@ -489,7 +490,7 @@ Register new  admin  profile. Login value is unique, other fields have length fr
   * **Example Request:** `curl -L -X DELETE 'http://localhost:8080/voting/rest/admin/restaurants/3' -u admin:111`
   * **Success Response:** ` 200 OK ` <br />
    ---------------------------------
-  ####Delete all meals and menu for today
+  #### Delete all meals and menu for today
    
    
    * **URL** :  `/rest/admin/restaurants/{restaurant_id}/meals`
