@@ -25,16 +25,16 @@ It should contain the code and README.md with API documentation and curl command
 
 ___
 
- ######The section below has public access  without  any credentions. It starts with $ROOT_PATH/rest/info .If parameter is not exist it return empty data.
+ #####The section below has public access  without  any credentions. It starts with $ROOT_PATH/rest/info .If parameter is not exist it return empty data.
 ___
 
 
-**Show todays restaurants menus**
+####Show todays restaurants menus
 
-  </t>Returns a list of menu data about all updated  restaurants menus.
+  Returns a list of menu data about all updated  restaurants menus.
   Menu data is represented by list of  objects, which including short restaurant info and meals items. </br>
   
-  Example :
+  Example of restaurant menu:
 ```json
    {    "restaurant_id": "[Integer]",
         "restaurant_name":"[String]",
@@ -57,101 +57,85 @@ ___
 
 * **URL** :  `/rest/info`
 * **Method:**  `GET`
-
 * **Example Request:** `curl --location --request GET 'http://localhost:8080/voting/rest/info'`
-
-* **Success Response:** `Code: 200` 
+* **Success Response:** ` 200 OK` 
   
  _________
 
- **Show top10 restaurants menus from all history**
+####Show top10 restaurants menus from all history
 
 
-  </t>Returns a list of 10 tops menus  with max `voted` value.
+ Returns a list of 10 tops menus  with max `voted` value.
 * **URL** :  `/rest/info/top10`
 * **Method:**  `GET`
-
 * **Example Request:** `curl --location --request GET 'http://localhost:8080/voting/rest/info/top10'`
-
-* **Success Response:** `Code: 200` 
+* **Success Response:** `200 OK` 
   
  --------   
- **Show top10  menus from one restaurant**
+ ####Show top10  menus from one restaurant
  
  
- Returns a list of 10 tops menus restaurants with `restaurant_id`.
+ Returns a list of 10 tops menus restaurants with `restaurant_id`
 
  * **URL** :  `/rest/info/top10/{restaurant_id}`
  * **Method:**  `GET`
-   
  *  **URL Params**: `restaurant_id`
- 
  *  **Example Request:** `curl --location --request GET 'http://localhost:8080/voting/rest/info/top10/3' `
-  
- *   **Success Response:** `Code: 200` 
+ *   **Success Response:** ` 200 OK` 
   --------------------------
-   
-**Show restaurant menu** 
+  
+####Show restaurant menu
 
 
-</t>Returns a  menu   with  `menu_id` . 
+Returns a  menu   with  `menu_id` . 
         
  * **URL** :  `/rest/info/menu/{menu_id}`
  * **Method:**  `GET`
-   
  *  **URL Params**: `menu_id`
-
  *  **Example Request:** `curl --location --request GET 'http://localhost:8080/voting/rest/info/menu/10' `
- 
- *  **Success Response:** `Code: 200` 
+ *  **Success Response:** `200 OK` 
  --------------------------------------
 
-**Show voting history**
+####Show voting history
 
   Returns a list of  data about all   menus restaurants,  where  `voted` value more than zero.
-  Data is represented by list of objects. One object is including date and list of short info restaurant items</br>
+  Data is represented by list of objects. One object is including date and `voteResult`  - a list of short info restaurant items</br>
   
   Example of short info item:
   ```json
      { 
-        "voted": 1,
-        "restaurantName": "Mishan",
-         "restaurnt_id": 2,
-         "menu_id": 10
+        "voted": "[Integer]",
+        "restaurantName": "[String]",
+        "restaurnt_id": "[Integer]",
+        "menu_id": "[Integer]"
      }
 ```
 
 
  * **URL** :  `/rest/info/votehist`
  * **Method:**  `GET`
- 
- *  **Example Request:** `curl --location --request GET 'http://localhost:8080/voting/rest/info/votehist'`  
-
- * **Success Response:** `Code: 200` <br />
+ * **Example Request:** `curl --location --request GET 'http://localhost:8080/voting/rest/info/votehist'`  
+ * **Success Response:** `200 OK` <br />
   -------------------
 
-**Show restaurant voting history**
+####Show restaurant voting history
 
 
 Returns a list of  data about vote history for restaurant and it menu with  `restaurant_id` value.
  
  * **URL** :  `/rest/info/votehist/{restaurant_id}`
  * **Method:**  `GET`
-   
  *  **URL Params**: `restaurant_id`
- 
  *  **Example Request:** `curl --location --request GET 'http://localhost:8080/voting/rest/info/votehist/2'  `
-
- 
- * **Success Response:** `Code: 200` <br />
+ *  **Success Response:** `200 OK` <br />
    
  
 ___
   
-######The section below is for register user and  all features that is has. To authorise request use basic authorization. It starts with $ROOT_PATH/rest/profile
+#####The section below is for register user and  all features that is has. To authorise request use basic authorization. It starts with $ROOT_PATH/rest/profile
 ___
 
-**Register new User**
+####Register new User
 
 Register user by sending form data. Login value is unique, other fields have length from 2 to 100. 
 
@@ -159,7 +143,6 @@ Example:
 
  * **URL** :  `/rest/profile/register`
  * **Method:**  `POST`
- 
  * **Data Params** :
  ```json
   {   "login": "[String]",
@@ -170,9 +153,8 @@ Example:
   ```
  * **Example Request:** 
  `curl -s -X POST -d '{"login": "newUser", "pass":"pass", "name":"name1","surName": "surname1"}'  -H 'Content-Type:application/json;charset=UTF-8' http://localhost:8080/voting/rest/profile/register `    
-   
-  * **Success Response:** `Code: 201 CREATED` <br />
-   * **Content:** 
+ * **Success Response:** `201 CREATED` <br />
+ * **Content:** 
      ```json
      {   "id": "[Integer]",
          "login": "[String]",
@@ -184,9 +166,8 @@ Example:
          "roles": "[Role]"
      }
      ```
-     
-    **Error Response:** `Code: 422 UNPROCESSABLE ENTITY`
-    * **Content:**
+ * **Error Response:** `422 UNPROCESSABLE ENTITY`
+ * **Content:**
 ```json
     {
         "url": "[String]",
@@ -195,39 +176,21 @@ Example:
     }
 ```
 --------------
- **Show user profile**
+ ####Show user profile
  
  
  * **URL** :  `/rest/profile`
  * **Method:**  `GET`
-
  * **Example Request:** `curl -L -X GET 'http://localhost:8080/voting/rest/profile' -u user1:pass`
-
- 
- * **Success Response:** `Code: 200` <br />
- * **Content:**
-```json
-  {      "id": "[Integer]",
-         "login": "[String]",
-         "pass":"[String]",
-         "name": "[String]",
-         "surName": "[String]",
-         "enabled": "[boolean]",
-         "registered": "[Date]",
-         "roles": "[Role]"
-     }
-```
-
-* **Error Response:** `Code: 401 UNAUTHORIZED `
+ * **Success Response:** ` 200 OK` <br />
+ * **Error Response:** ` 401 UNAUTHORIZED `
  ___   
- **Update user** 
-  
-  
-  
+ ####Update user 
+   
   
   * **URL** :  `/rest/profile`
   * **Method:**  `PUT`
-   * **Data Params** : `not all field are required`
+  * **Data Params** : `not all field are required`
        ```json
          {      
                 "pass":"[String]",    
@@ -235,80 +198,36 @@ Example:
                 "surName": "[String]"
          }
        ```
-    
-    * **Example Request:** `curl -L -X PUT -d '{"name": "newname", "pass":"newpass"}'  -H 'Content-Type:application/json;charset=UTF-8' 'http://localhost:8080/voting/rest/profile' -u user1:pass`
-   
-    
- * **Success Response:**
-    
-      * **Code:** 200 <br />
-      * **Content:**
-   ```json
-     {      "id": "[Integer]",
-            "login": "[String]",
-            "pass":"[String]",
-            "name": "[String]",
-            "surName": "[String]",
-            "enabled": "[boolean]",
-            "registered": "[Date]",
-            "roles": "[Role]"
-        }
-   ```
-   
-   * **Error Response:**
-       * **Code:**  401 `UNAUTHORIZED `
-        * **Code:**  422 `UNPROCESSABLE ENTITY`
-           * **Content:**
-       ```json
-           {
-               "url": "[String]",
-               "type": "[ErrorType]",
-               "detail": "[String]"
-           }
-       ```
+  * **Example Request:** `curl -L -X PUT -d '{"name": "newname", "pass":"newpass"}'  -H 'Content-Type:application/json;charset=UTF-8' 'http://localhost:8080/voting/rest/profile' -u user1:pass`
+  * **Success Response:** ` 200 OK` <br />
+  * **Error Response:**
+      * **Code:**  401 `UNAUTHORIZED `
+      * **Code:**  422 `UNPROCESSABLE ENTITY`
  
  ___   
- **Vote for restaurant**
+ ####Vote for restaurant
     
   Making vote for restaurant with `restaurant_id` parameter. If time is acceptable for voting you get `You has voted  for restaurant with id = {id}` or `Sorry. It's too late to vote`.   
    * **URL** :  /rest/profile/vote
    * **Method:**  `GET`
-       
-   *  **GET Params**: `id`
-          
+   * **GET Params**: `id`
    * **Example Request:** `curl -L -X GET -H 'Content-Type:application/json;charset=UTF-8' 'http://localhost:8080/voting/rest/profile/vote?id=3' -u user1:pass`
-    
-     
-  * **Success Response:**
-     
+   * **Success Response:**
        * **Code:** 202 `ACCEPTED` <br />
        * **Content:** `You  voted  for restaurant with id = 3`
-          
-    
    * **Error Response:**
         * **Code:**  401 `UNAUTHORIZED `
         * **Code:**  422 `UNPROCESSABLE ENTITY`
-            * **Content:**
-        ```json
-            {
-                "url": "[String]",
-                "type": "[ErrorType]",
-                "detail": "[String]"
-            }
-        ```
+  
   ___   
-  **Get user voting history**
+  ####Get user voting history
   
   
    * **URL** :  `/rest/profile/history`
    * **Method:**  `GET`
-                 
-       
    * **Example Request:** `curl -L -X GET  'http://localhost:8080/voting/rest/profile/history' -u user2:pass`
-      
-       
-   * **Success Response:** `Code: 200` <br />
-        * **Content:**  
+   * **Success Response:** `200 OK` <br />
+   * **Content:**  
 ```json
     [  
         {
@@ -322,81 +241,36 @@ Example:
         
     ]
 ```  
-  * **Error Response:** `Code: 401 UNAUTHORIZED`  
+  * **Error Response:** ` 401 UNAUTHORIZED`  
 _____
        
-######The section below is for admin and  all features that is has. To authorise request usebasic authorization. It starts with $ROOT_PATH/rest/admin . Admin can manage its profile like a simple  user  and orthers users profiles. Admin manage resturants info.
+#####The section below is for admin and  all features that is has. To authorise request usebasic authorization. It starts with $ROOT_PATH/rest/admin . Admin can manage its profile like a simple  user  and orthers users profiles. Admin manage resturants info.
 ___              
 
 If use  simple user credentials,  server will back 403 HTTP Error.
 ______
 
-**Show users**
-
-
+####Show users
    * **URL** :  `/rest/admin/users`
    * **Method:**  `GET`
-          
-       
    * **Example Request:** `curl -L -X GET  'http://localhost:8080/voting/rest/admin/users' -u admin:111`
-      
-       
-   * **Success Response:** `Code: 200` <br />
-        * **Content:**  
-  ```json
-     {      "id": "[Integer]",
-            "login": "[String]",
-            "pass":"[String]",
-            "name": "[String]",
-            "surName": "[String]",
-            "enabled": "[boolean]",
-            "registered": "[Date]",
-            "roles": "[Role]"
-        }
-   ```
+   * **Success Response:** ` 200 OK` <br />
 ______________________
- **Show one user profile**
- 
-
-       
+ ####Show one user profile
+        
 * **URL** :  `/rest/admin/users/{userID}`
 * **Method:**  `GET`
-   
- *  **URL Params**: `userID`
-   
- * **Example Request:** `curl -L -X GET  'http://localhost:8080/voting/rest/admin/users/1' -u admin:111`
-
-     
-   * **Success Response:** `Code: 200` <br />
-        * **Content:**  
-  ```json
-     {      "id": "[Integer]",
-            "login": "[String]",
-            "pass":"[String]",
-            "name": "[String]",
-            "surName": "[String]",
-            "enabled": "[boolean]",
-            "registered": "[Date]",
-            "roles": "[Role]"
-        }
-   ```
-   * **Error Response:** `Code:  422 UNPROCESSABLE ENTITY`
-   * **Content:**
-        ```json
-            {
-                "url": "[String]",
-                "type": "[ErrorType]",
-                "detail": "[String]"
-            }
-        ```
+* **URL Params**: `userID`
+* **Example Request:** `curl -L -X GET  'http://localhost:8080/voting/rest/admin/users/1' -u admin:111`
+* **Success Response:** `200 OK` <br />
+* **Error Response:** `422 UNPROCESSABLE ENTITY`
  __________
- **Create admin user**
+ ####Create admin user
  
 Register new  admin  profile. Login value is unique, other fields have length from 2 to 100. Example:
 
  * **URL** :  `/rest/admin/users`
  * **Method:**  `POST`
-
  * **Data Params** :
  ```json
   {   "login": "[String]",
@@ -407,134 +281,62 @@ Register new  admin  profile. Login value is unique, other fields have length fr
   ```
  * **Example Request:** 
  `curl -s -X POST -d '{"login": "admin2", "pass":"111", "name":"adminName","surName": "adminSurname"}'  -H 'Content-Type:application/json;charset=UTF-8' 'http://localhost:8080/voting/rest/admin/users'  -u admin:111 `    
-  
-  * **Success Response:** `Code: 201 CREATED` <br />
-   * **Content:** 
-     ```json
-     {   "id": "[Integer]",
-         "login": "[String]",
-         "pass":"[String]",
-         "name": "[String]",
-         "surName": "[String]",
-         "enabled": "[boolean]",
-         "registered": "[Date]",
-         "roles": "[Role]"
-     }
-     ```
-     
-    **Error Response:** `Code:  422 UNPROCESSABLE ENTITY` 
-    * **Content:**
-```json
-    {
-        "url": "[String]",
-        "type": "[ErrorType]",
-        "detail": "[String]"
-    }
-```
+ * **Success Response:** `201 CREATED` <br />
+ *  **Error Response:** ` 422 UNPROCESSABLE ENTITY` 
+
 ----
    
-**Disable/enable user profile**
-
-
+####Disable/enable user profile
    
    Change field `enabled` in user profile. Disabled user can't authorise.
    
    * **URL** :  `/rest/admin/users/{userID}`
    * **Method:**  `PATCH`
-     
-   *  **URL Params**: `userID`
-   *  **Get Params**: `enabled`
- 
+   * **URL Params**: `userID`
+   * **Get Params**: `enabled`
    * **Example Request:** 
     `curl -s -X PATCH  'http://localhost:8080/voting/rest/admin/users/3?enabled=false'  -u admin:111 `    
+   * **Success Response:** `200 OK` <br /> 
+   * **Error Response:**  `422 UNPROCESSABLE ENTITY` 
    
-   *  **Success Response:** `Code: 200` <br /> 
-   * **Error Response:**  `Code:  422 UNPROCESSABLE ENTITY` 
-   * **Content:**
-  ```json
-      {
-          "url": "[String]",
-          "type": "[ErrorType]",
-          "detail": "[String]"
-      }
-```
   ------
-  **Update  user**
+  ####Update  user
   
     
    * **URL** :  `/rest/admin/user/{userID}`
    * **Method:**  `PUT`
-        
-   *  **URL Params**: `userID`
-      
-     * **Data Params** : `not all field are required`
-         ```json
+   * **URL Params**: `userID`
+   * **Data Params** : `not all field are required`
+       ```json
            {      
                   "pass":"[String]",    
                   "name": "[String]",   
                   "surName": "[String]" 
            }
-         ```
-      
-      * **Example Request:** `curl -L -X PUT -d '{"name": "newname", "pass":"newpass"}'  -H 'Content-Type:application/json;charset=UTF-8' 'http://localhost:8080/voting/rest/admin/users/3' -u admin:111`
-     
-      
-   * **Success Response:** `Code: 200` <br />
-        * **Content:**
-     ```json
-       {      "id": "[Integer]",
-              "login": "[String]",
-              "pass":"[String]",
-              "name": "[String]",
-              "surName": "[String]",
-              "enabled": "[boolean]",
-              "registered": "[Date]",
-              "roles": "[Role]"
-          }
-     ```
-     
-     * **Error Response:** `Code:  422 UNPROCESSABLE ENTITY`
-      * **Content:**
-         ```json
-             {
-                 "url": "[String]",
-                 "type": "[ErrorType]",
-                 "detail": "[String]"
-             }
-         ```
- -----
- **Delete user**
+        ```
+   * **Example Request:** `curl -L -X PUT -d '{"name": "newname", "pass":"newpass"}'  -H 'Content-Type:application/json;charset=UTF-8' 'http://localhost:8080/voting/rest/admin/users/3' -u admin:111`
+   * **Success Response:** `200 OK` <br />
+   * **Error Response:** `  422 UNPROCESSABLE ENTITY`
+    -----
+ ####Delete user
   
 
   * **URL** :  `/rest/admin/user/{userID}`
   * **Method:**  `DELETE`
-         
-  *  **URL Params**: `userID`
-       
-     
-       
-   * **Example Request:** `curl -L -X DELETE  'http://localhost:8080/voting/rest/admin/users/3' -u admin:111`
-     
-   * **Success Response:** `Code: 200` <br />
-       
-   * **Error Response:** `Code:  422 UNPROCESSABLE ENTITY`
-   * **Content:**
-   
-      ```json
-      {
-           "url": "[String]",
-           "type": "[ErrorType]",
-           "detail": "[String]"
-      }
-     ```    
+  * **URL Params**: `userID`
+  * **Example Request:** `curl -L -X DELETE  'http://localhost:8080/voting/rest/admin/users/3' -u admin:111`
+  * **Success Response:** `200 OK` <br />
+  * **Error Response:** `422 UNPROCESSABLE ENTITY`
+    
    ---------------------
-   **Show restaurants**
+   ####Show restaurants
    
    
    Show list of restaurants with short information about them timezones and if restaurants have updated menu.
       Timezone is nessesary to determinate the time vote border. Timezone must be in GMT format ( for example GMT+10:00) This time can be change in `app.properties` file before compilation. The defaulf value is 11:00 according task conditions.
     <br/>
-     Example:
+     
+   Example:
    ```json
      {
              "id":"[Integer]" ,
@@ -545,25 +347,20 @@ Register new  admin  profile. Login value is unique, other fields have length fr
    ```
    * **URL** :  `/rest/admin/restaurants`
    * **Method:**  `GET`
-   
    * **Example Request:** `curl -L -X GET  'http://localhost:8080/voting/rest/admin/restaurants' -u admin:111`
-   
-   * **Success Response:** `Code: 200` <br />
+   * **Success Response:** ` 200 OK` <br />
  
    ------------------
-   **Show one restaurant**
+   ####Show one restaurant
     
  
  Display the same information as above but only for one restaurant
  
   * **URL** :  `/rest/admin/restaurants/{id}`
   * **Method:**  `GET`
-  
-  *  **URL Params**: `id`
-      
+  * **URL Params**: `id`
   * **Example Request:** `curl -L -X GET  'http://localhost:8080/voting/rest/admin/restaurants/3' -u admin:111`
-       
-  * **Success Response:** `Code: 200` <br />
+  * **Success Response:** ` 200 OK` <br />
   * **Content:**
    ```json
               {
@@ -575,7 +372,7 @@ Register new  admin  profile. Login value is unique, other fields have length fr
    ```
   _____________________
             
- **Create restaurant**
+ ####Create restaurant
   
  * **URL** :  `/rest/admin/restaurants`
  * **Method:**  `POST`
@@ -588,7 +385,7 @@ Register new  admin  profile. Login value is unique, other fields have length fr
 }
 ```
    * **Example Request:** `curl -L -X POST -d '{"name": "newname", "timezone":"GMT+10:00"}'  -H 'Content-Type:application/json;charset=UTF-8' 'http://localhost:8080/voting/rest/admin/restaurants' -u admin:111`
-   * **Success Response:** `Code: 201 CREATED`  <br />  
+   * **Success Response:** ` 201 CREATED`  <br />  
    * **Content:**
    ```json
                {
@@ -600,13 +397,12 @@ Register new  admin  profile. Login value is unique, other fields have length fr
    ```
  -----------------
  
- **Update restaurant information**
+ ####Update restaurant information
   
   * **URL** :  `/rest/admin/restaurants/{id}`
-   * **Method:**  `PUT`
-   *  **URL Params**: `id`
-  
-     * **Data Params** :
+  * **Method:**  `PUT`
+  * **URL Params**: `id`
+  * **Data Params** :
     
  ```json
  {
@@ -615,30 +411,18 @@ Register new  admin  profile. Login value is unique, other fields have length fr
  }
  ```
    * **Example Request:** `curl -L -X PUT -d '{"name": "newname", "timezone":"GMT+10:00"}'  -H 'Content-Type:application/json;charset=UTF-8' 'http://localhost:8080/voting/rest/admin/restaurants/3' -u admin:111`
-
-   * **Success Response:** `Code: 200` <br />
-   * **Content:**
-  ```json
-     {
-        "id":"[Integer]" ,
-        "name": "[STring]",
-        "timezone": "[GMT timezone]",
-        "isMenuUpdated": "[boolean]"
-     }
-   ```
-   ___________________________________________
-   **Delete restaurant**
+   * **Success Response:** ` 200 OK` <br />
+    ___________________________________________
+   ####Delete restaurant
    
    * **URL** :  `/rest/admin/restaurants/{id}`
    * **Method:**  `DELETE`
    *  **URL Params**: `id`
-
    * **Example Request:** `curl -L -X DELETE 'http://localhost:8080/voting/rest/admin/restaurants/3' -u admin:111`
-    
-  * **Success Response:** `Code: 200` <br /> 
+   * **Success Response:** `200 OK` <br /> 
  -----------------------------------------
  
-**Show today's  menu for single  restaurant**
+####Show today's  menu for single  restaurant
  
  
  Get detail info about menu and meals for single restaurant 
@@ -646,36 +430,9 @@ Register new  admin  profile. Login value is unique, other fields have length fr
    * **Method:**  `GET`
    *  **URL Params**: `restaurant_id`
    * **Example Request:** `curl -L -X GET 'http://localhost:8080/voting/rest/admin/restaurants/2/meals' -u admin:111`
-   * **Success Response:** `Code: 200` <br /> 
-   * **Content:**
- ```json
-{
-    "restaurant_id": "[Integer]",
-    "restaurant_name": "[String]",
-    "menuDate": "[LocalDate]",
-    "voted": "[Integer]",
-    "menu_id": "[Integer]",
-    "menu": [
-        {
-            "id": "[Integer]",
-            "description": "[String]",
-            "price": "[Integer]"
-        },
-        {
-            "id": "[Integer]",
-            "description": "[String]",
-            "price": "[Integer]"
-        },
-        {
-            "id": 45,
-            "description": "[String]",
-            "price": "[Integer]"
-        }
-    ]
-}
-```  
+   * **Success Response:** ` 200 OK` <br /> 
   ---------------------------
- **Add meal to menu**
+ ####Add meal to menu
  
   Create  meal item and menu for restaurant if not exist. 
    * **URL** :  `/rest/admin/restaurants/{restaurant_id}/meals`
@@ -690,7 +447,6 @@ Register new  admin  profile. Login value is unique, other fields have length fr
     }
    ```
    * **Example Request:** `curl -L -X POST -d '{"description": "newmeal", "price":"100"}'  -H 'Content-Type:application/json;charset=UTF-8' 'http://localhost:8080/voting/rest/admin/restaurants/2/meals' -u admin:111`
-       
    * **Success Response:** `Code: 201 CREATED` <br />
    *  **Content:**
  ```json
@@ -711,7 +467,6 @@ Register new  admin  profile. Login value is unique, other fields have length fr
   * **URL** :  `/rest/admin/restaurants/{restaurant_id}/meals/{id}`
   * **Method:**  `PUT`
   *  **URL Params**: `restaurant_id` , `id`
-   
   * **Data Params** :
  ```json
       {
@@ -721,21 +476,10 @@ Register new  admin  profile. Login value is unique, other fields have length fr
   
   ```
    * **Example Request:** `curl -L -X PUT -d '{"description": "newmeal", "price":"100"}'  -H 'Content-Type:application/json;charset=UTF-8' 'http://localhost:8080/voting/rest/admin/restaurants/3/meals/43' -u admin:111`
- 
-   * **Success Response:** `Code: 201 CREATED` <br />
-   *  **Content:**
- ```json
-{
-    "id": "[Integer]",
-    "description": "[String]",
-    "price": "[Integer]",
-    "menu_id": "[Integer]",
-    "restaurant_id": "[Integer]"
-}
-  ```
+   * **Success Response :** ` 201 CREATED` <br />
   -------------------
   
-  **Delete meal**
+  ####Delete meal
    
   Delete meal by its `id` and by `restaurant_id`
   
@@ -743,16 +487,13 @@ Register new  admin  profile. Login value is unique, other fields have length fr
   * **Method:**  `DELETE`
   * **URL Params**: `restaurant_id` , `id`
   * **Example Request:** `curl -L -X DELETE 'http://localhost:8080/voting/rest/admin/restaurants/3' -u admin:111`
-      
-  * **Success Response:** `Code: 200 ` <br />
+  * **Success Response:** ` 200 OK ` <br />
    ---------------------------------
-  **Delete all meals and menu for today**
+  ####Delete all meals and menu for today
    
    
    * **URL** :  `/rest/admin/restaurants/{restaurant_id}/meals`
    * **Method:**  `DELETE`
    *  **URL Params**: `restaurant_id`
-     
    * **Example Request:** `curl -L -X DELETE 'http://localhost:8080/voting/rest/admin/restaurants/3/meals' -u admin:111`
-         
-   * **Success Response:** `Code: 200 ` <br />
+   * **Success Response:** ` 200 OK ` <br />
