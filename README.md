@@ -25,7 +25,7 @@ It should contain the code and README.md with API documentation and curl command
 
 ___
 
- #####The section below has public access  without  any credentions. It starts with $ROOT_PATH/rest/info .If parameter is not exist it return empty data.
+#####The section below has public access  without  any credentions. It starts with $ROOT_PATH/rest/info .If parameter is not exist it return empty data.
 ___
 
 
