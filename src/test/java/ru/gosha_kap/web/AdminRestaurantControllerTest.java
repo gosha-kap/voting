@@ -82,7 +82,7 @@ class AdminRestaurantControllerTest extends AbstractTestController {
     @Test
     void deleteRestaurant() throws Exception {
         perform((doDelete(3)).basicAuth(ADMIN)).andDo(print()).
-                andExpect(status().isOk());
+                andExpect(status().isNoContent());
         assertEquals(restaurantService.getAll().size(), 3);
     }
 

@@ -39,7 +39,7 @@ class AdminUserControllerTest extends AbstractTestController {
     @Test
     void deleteUser() throws Exception {
         perform(doDelete(3).basicAuth(ADMIN)).
-                andExpect(status().isOk());
+                andExpect(status().isNoContent());
         assertEquals(userService.getAll().size(),4);
     }
 

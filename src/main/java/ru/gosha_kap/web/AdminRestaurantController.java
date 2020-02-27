@@ -65,6 +65,7 @@ public class AdminRestaurantController {
     }
 
     @DeleteMapping("{restaurantID}")
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void deleteRestaurant(@PathVariable int restaurantID){
         log.info("delete  restaurant with id="+restaurantID);
         restaurantService.delete(restaurantID);
@@ -101,6 +102,7 @@ public class AdminRestaurantController {
 
 
     @DeleteMapping(value = "{restaurantID}/meals/{mealID}")
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void deleteMeal(@PathVariable int restaurantID ,
                            @PathVariable int mealID){
         log.info("delete meal for menu  with restaurantID="+restaurantID);
@@ -108,6 +110,7 @@ public class AdminRestaurantController {
     }
 
     @DeleteMapping(value = "{restaurantID}/meals")
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void deleteMenu(@PathVariable int restaurantID){
         log.info("delete today's menu  for restaurantID="+restaurantID);
         menuService.delete(restaurantID);
