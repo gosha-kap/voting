@@ -70,7 +70,7 @@ public class UserController  {
     @GetMapping(value="/vote",consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> vote(@RequestParam int id){
         menuService.checkTodayMenu(id);
-        if(!voteService.checkTime(id))
+        if(voteService.checkTime(id))
             return new ResponseEntity<>("Sorry. It's too late to vote",HttpStatus.ACCEPTED);
         voteService.vote(authUserId(),id);
         menuService.updateVotes();

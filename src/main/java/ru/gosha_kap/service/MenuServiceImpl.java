@@ -102,7 +102,7 @@ public class MenuServiceImpl implements MenuService {
     @Transactional
     public void delete(int mealID, Menu menu) {
         Meal meal = mealRepository.getOne(mealID);
-        checkNotFound(meal,": error delete meal");
+        checkNotFoundWithId(meal,mealID );
         assureIdIsIncluded(menu,meal);
         mealRepository.delete(meal);
     }
@@ -110,7 +110,8 @@ public class MenuServiceImpl implements MenuService {
     @Override
     @Transactional
     public void delete(int restaurantID) {
-        menuRepository.deleteTodayMenu(restaurantID, LocalDate.now());
+        checkNotFoundWithId((
+                menuRepository.deleteTodayMenu(restaurantID, LocalDate.now()))!=0,restaurantID);
     }
 
     @Override

@@ -10,7 +10,6 @@ import java.util.Objects;
 @Embeddable
 public class Vote implements Serializable {
 
-
     @NotNull
     private Integer user_id;
 

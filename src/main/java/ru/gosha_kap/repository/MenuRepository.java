@@ -40,7 +40,7 @@ public interface MenuRepository extends JpaRepository<Menu,Integer> {
 
     @Modifying
     @Query("delete from Menu m where m.restaurant.id=?1 and m.date=?2")
-    void deleteTodayMenu(int id,LocalDate date);
+    int deleteTodayMenu(int id,LocalDate date);
 
 
     Menu findByRestaurantIdAndDateIsLike(int id, LocalDate date);

@@ -24,10 +24,8 @@ As a result, provide a link to github repository.
 It should contain the code and README.md with API documentation and curl commands to get data for voting and vote.
 
 ## REST API
-___
 
-##### The section below has public access  without  any credentions. It starts with $ROOT_PATH/rest/info .If parameter is not exist it return empty data.
-___
+##### The section below has public access  without  any credentions. It starts with $ROOT_PATH/rest/info.
 
 
 ### Show todays restaurants menus
@@ -221,10 +219,10 @@ Example:
  ___   
  ### Vote for restaurant
     
-  Making vote for restaurant with `restaurant_id` parameter. If time is acceptable for voting you get `You has voted  for restaurant with id = {id}` or `Sorry. It's too late to vote`.   
-   * **URL** :  /rest/profile/vote
+  Making vote for restaurant with `restaurant_id` parameter. If time is acceptable for voting you get `You has voted  for restaurant with id = {restaurant_id}` or `Sorry. It's too late to vote`.   
+   * **URL** :  `/rest/profile/vote?id={restaurant_id}`
    * **Method:**  `GET`
-   * **GET Params**: `id`
+   * **GET Params**: `restaurant_id`
    * **Example Request:** `curl -L -X GET -H 'Content-Type:application/json;charset=UTF-8' 'http://localhost:8080/voting/rest/profile/vote?id=3' -u user1:pass`
    * **Success Response:**
        * **Code:** 202 `ACCEPTED` <br />
@@ -234,7 +232,7 @@ Example:
        
    * **Error Response:**
         * **Code:**  401 `UNAUTHORIZED `
-        * **Code:**  422 `UNPROCESSABLE ENTITY`
+        * **Code:**  400 `Bad Request`
           * **Content:** `Error object.`
 
   ___   
@@ -262,7 +260,7 @@ Example:
   * **Error Response:** ` 401 UNAUTHORIZED`  
 _____
        
-##### The section below is for admin and  all features that is has. To authorise request use basic authorization. It starts with $ROOT_PATH/rest/admin . Admin can manage its profile like a simple  user  and orthers users profiles. Admin manage resturants info. If use  simple user credentials,  server will back 403 HTTP Error.
+##### The section below is for admin and  all features that is has. To authorise request use basic authorization. It starts with $ROOT_PATH/rest/admin . Admin can update his profile  and manage  users profiles and resturants. If use  user credentials,  server will back 403  error. If credential is not exist server back 401 error
 ______
 
 ### Show users
@@ -272,7 +270,7 @@ ______
    * **Success Response:** ` 200 OK` <br />
      * **Content:** `List of user objects.`
 ______________________
-#### Show one user profile
+### Show one user profile
         
 * **URL** :  `/rest/admin/users/{userID}`
 * **Method:**  `GET`
@@ -280,7 +278,7 @@ ______________________
 * **Example Request:** `curl -L -X GET  'http://localhost:8080/voting/rest/admin/users/1' -u admin:111`
 * **Success Response:** `200 OK` <br />
   * **Content:** `User object.`
-* **Error Response:** `422 UNPROCESSABLE ENTITY`
+* **Error Response:** `400 Bad Request`
   * **Content:** `Error object.`
  __________
 #### Create admin user
@@ -325,7 +323,7 @@ Register new  admin  profile. Login value is unique, other fields have length fr
    * **Get Params**: `enabled`
    * **Example Request:**  `curl -s -X PATCH  'http://localhost:8080/voting/rest/admin/users/3?enabled=false'  -u admin:111 `    
    * **Success Response:** `204 No Content` <br /> 
-   * **Error Response:**  `422 UNPROCESSABLE ENTITY` 
+   * **Error Response:**  `400 Bad Request` 
      * **Content:** `Error object.`
    
   ------
@@ -347,8 +345,7 @@ Register new  admin  profile. Login value is unique, other fields have length fr
   * **Success Response:** ` 200 OK` <br />
     * **Content:**  `User info object.`
   * **Error Response:**
-      * **Code:**  401 `UNAUTHORIZED `
-      * **Code:**  422 `UNPROCESSABLE ENTITY`
+      * **Code:**  400 `Bad Request`
         * **Content:** `Error object.`
      
   -----
@@ -360,7 +357,7 @@ Register new  admin  profile. Login value is unique, other fields have length fr
   * **URL Params**: `userID`
   * **Example Request:** `curl -L -X DELETE  'http://localhost:8080/voting/rest/admin/users/3' -u admin:111`
   * **Success Response:** `204 No Content` <br />
-  * **Error Response:** `422 UNPROCESSABLE ENTITY`
+  * **Error Response:** `400 Bad Request`
      * **Content:** `Error object.`
         
    ---------------------
@@ -396,7 +393,7 @@ Register new  admin  profile. Login value is unique, other fields have length fr
   * **Example Request:** `curl -L -X GET  'http://localhost:8080/voting/rest/admin/restaurants/3' -u admin:111`
   * **Success Response:** ` 200 OK` <br />
     * **Content:** `Restaurant short info object.`
-  * **Error Response:** `422 UNPROCESSABLE ENTITY`
+  * **Error Response:** `400 Bad Request`
      * **Content:** `Error object.`
         
    
@@ -435,7 +432,7 @@ Register new  admin  profile. Login value is unique, other fields have length fr
    * **Example Request:** `curl -L -X PUT -d '{"name": "newname", "timezone":"GMT+10:00"}'  -H 'Content-Type:application/json;charset=UTF-8' 'http://localhost:8080/voting/rest/admin/restaurants/3' -u admin:111`
    * **Success Response:** ` 200 OK` <br />
      * **Content:** `Restaurant short info object.`
-   * **Error Response:** `422 UNPROCESSABLE ENTITY`
+   * **Error Response:** `400 Bad Request`
      * **Content:** `Error object.`
 ___________________________________________
    
@@ -446,7 +443,7 @@ ___________________________________________
    *  **URL Params**: `id`
    * **Example Request:** `curl -L -X DELETE 'http://localhost:8080/voting/rest/admin/restaurants/3' -u admin:111`
    * **Success Response:** `204 No Content` <br /> 
-   * **Error Response:** `422 UNPROCESSABLE ENTITY`
+   * **Error Response:** `400 Bad Request`
      * **Content:** `Error object.`
   
  -----------------------------------------
@@ -478,7 +475,7 @@ ___________________________________________
        ]   }
    
    ```
-   * **Error Response:** `422 UNPROCESSABLE ENTITY`
+   * **Error Response:** `400 Bad Request`
      * **Content:** `Error object.`
   ---------------------------
  ### Add meal to menu
@@ -506,7 +503,8 @@ ___________________________________________
     "restaurant_id": "[Integer]"
 }
   ```
-   * **Error Response:** `422 UNPROCESSABLE ENTITY`
+   * **Error Response:** `422 UNPROCESSABLE ENTITY`,
+                         `400 Bad Request`
      * **Content:** `Error object.`
  ----------------------------------
  
@@ -527,8 +525,8 @@ ___________________________________________
    * **Example Request:** `curl -L -X PUT -d '{"description": "newmeal", "price":"100"}'  -H 'Content-Type:application/json;charset=UTF-8' 'http://localhost:8080/voting/rest/admin/restaurants/3/meals/43' -u admin:111`
    * **Success Response :** ` 20O OK` <br />
       *  **Content:** `Meal Object info`
-   * **Error Response:** `422 UNPROCESSABLE ENTITY`
-       * **Content:** `Error object.`
+   * **Error Response:** `422 UNPROCESSABLE ENTITY or 400 Bad Request`
+        * **Content:** `Error object.`
    
   -------------------
   
@@ -541,10 +539,10 @@ ___________________________________________
   * **URL Params**: `restaurant_id` , `id`
   * **Example Request:** `curl -L -X DELETE 'http://localhost:8080/voting/rest/admin/restaurants/3' -u admin:111`
   * **Success Response:** ` 204 No Content ` <br />
-  * **Error Response:** `422 UNPROCESSABLE ENTITY`
+  * **Error Response:** `400 Bad Request`
     * **Content:** `Error object.`
    --------------------------------
-  #### Delete todays's menu for restaurant
+  ### Delete todays's menu for restaurant
    
    
    * **URL** :  `/rest/admin/restaurants/{restaurant_id}/meals`
@@ -552,5 +550,5 @@ ___________________________________________
    *  **URL Params**: `restaurant_id`
    * **Example Request:** `curl -L -X DELETE 'http://localhost:8080/voting/rest/admin/restaurants/3/meals' -u admin:111`
    * **Success Response:** ` 204 No Content ` <br />
-   * **Error Response:** `422 UNPROCESSABLE ENTITY`
+   * **Error Response:** `400 Bad Request`
      * **Content:** `Error object.`

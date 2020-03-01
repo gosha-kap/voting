@@ -30,7 +30,6 @@ public class InfoController {
         return MenuUtil.createRestaurantInfo(menuService.getMenu(menuID));
     }
 
-
      @GetMapping("/votehist/{restaurantId}")
     public List<RestrntVoteHistory> getHistoryForOne(@PathVariable int restaurantId) {
         return MenuUtil.getVoteHistory(menuService.getHistoryForOne(restaurantId));

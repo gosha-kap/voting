@@ -9,7 +9,6 @@ import javax.validation.constraints.NotNull;
 @Table(name = "voting_history")
 public class VoteEntity {
 
-
     @EmbeddedId
     private Vote vote;
 

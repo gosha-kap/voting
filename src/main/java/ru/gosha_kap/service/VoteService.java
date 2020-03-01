@@ -38,15 +38,18 @@ public class VoteService {
 
     public boolean checkTime(int restaurantId){
 
+
         String restaurantTZ = restaurantRepository.getTZ(restaurantId);
-        ZonedDateTime restaurantTime = ZonedDateTime.now(ZoneId.of(restaurantTZ));
+        ZoneId zoneId = ZoneId.of(restaurantTZ);
+        ZonedDateTime restaurantTime = ZonedDateTime.now(zoneId);
         ZonedDateTime voteLimitTime = ZonedDateTime.of(LocalDate.now(),LocalTime.of(voteLimitHour,voteLimitMinutes),ZoneId.of(restaurantTZ));
         return restaurantTime.isAfter(voteLimitTime);
     }
 
     @Transactional
     public void vote(int authUserId, int id) {
-         voteJPARepository.save(new VoteEntity(new Vote(authUserId),id));
+
+        voteJPARepository.save(new VoteEntity(new Vote(authUserId),id));
     }
 
     public List<VoteEntity> getHistoryForUser(int authUserId) {

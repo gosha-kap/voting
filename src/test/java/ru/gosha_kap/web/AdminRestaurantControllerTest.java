@@ -46,7 +46,7 @@ class AdminRestaurantControllerTest extends AbstractTestController {
         String Json = "{\"name\":\"TestRestaurntName\",\"timezone\":\"GMTerror+10:00\"}";
         ResultActions action = perform(doPost().basicAuth(ADMIN).readyJsonBody(Json))
                 .andDo(print())
-                .andExpect(status().isUnprocessableEntity());
+                .andExpect(status().isBadRequest());
     }
 
     @Test
@@ -62,7 +62,7 @@ class AdminRestaurantControllerTest extends AbstractTestController {
     void updateRestaurantInvalidDate() throws Exception {
         String Json = "{\"name\":\"TestRestaurntName\",\"id\":\"1\"}";
         perform(doPut(2).basicAuth(ADMIN).readyJsonBody(Json)).andDo(print()).
-                andExpect(status().isUnprocessableEntity());
+                andExpect(status().isBadRequest());
     }
 
     @Test
@@ -76,7 +76,7 @@ class AdminRestaurantControllerTest extends AbstractTestController {
     @Test
     void deleteRestaurantNoExist() throws Exception {
         perform((doDelete(40)).basicAuth(ADMIN)).andDo(print()).
-                andExpect(status().isUnprocessableEntity());
+                andExpect(status().isBadRequest());
     }
 
     @Test

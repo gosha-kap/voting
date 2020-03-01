@@ -33,7 +33,7 @@ class AdminUserControllerTest extends AbstractTestController {
     @Test
     void deleteNotExistUser() throws Exception {
         perform(doDelete(30).basicAuth(ADMIN)).
-                andExpect(status().isUnprocessableEntity());
+                andExpect(status().isBadRequest());
     }
 
     @Test
